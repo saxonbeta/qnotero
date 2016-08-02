@@ -26,6 +26,33 @@ import sys
 import time
 from libzotero.zotero_item import zoteroItem as zotero_item
 
+def decode_zotero_str(raw, max_iters=3):
+
+	"""
+	Decodes a string from the Zotero database.
+	
+	There seems to be an issue with the way, Zotero encodes
+	strings in its database: For some reason, Zotero encodes
+	them *twice* with UTF-8, at least sometimes. This
+	functions aims to decode such strings, even if they were
+	encoded more than twice.
+
+	For example, Zotero was observed to encode
+	
+		u'Öf'  as  b'\xc3\x83\xc2\x96\x66',
+	
+	which is the UTF-8 encoding for u'\xC3\x96f', where
+	u'\xC3\x96' is *in turn* an UTF-8 representation of u'Ö'.
+	"""
+
+	result = str(raw, 'utf-8')
+	for iter in range(max_iters):
+		try:
+			result = str(bytes([ord(c) for c in result]), 'utf-8')
+		except:
+			break
+	return result
+
 class LibZotero(object):
 
 	"""
@@ -170,6 +197,7 @@ class LibZotero(object):
 			# Copy the zotero database to the gnotero copy
 			shutil.copyfile(self.zotero_database, self.gnotero_database)
 			self.conn = sqlite3.connect(self.gnotero_database)
+			self.conn.text_factory = decode_zotero_str
 			self.cur = self.conn.cursor()
 			# First create a list of deleted items, so we can ignore those later
 			deleted = []
