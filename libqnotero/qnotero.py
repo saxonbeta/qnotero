@@ -35,7 +35,7 @@ class Qnotero(QMainWindow, UiLoader):
 
 	"""The main class of the Qnotero GUI"""
 
-	version = '2.0.0'
+	version = '2.1.0'
 
 	def __init__(self, systray=True, debug=False, reset=False, parent=None):
 
@@ -209,7 +209,7 @@ class Qnotero(QMainWindow, UiLoader):
 			self.noteProvider = GnoteProvider(self)
 		self.zotero = LibZotero(getConfig(u"zoteroPath"), self.noteProvider)
 		if hasattr(self, u"sysTray"):
-			self.sysTray.setIcon(self.theme.icon(u"qnotero"))
+			self.sysTray.updateIcon()
 
 	def restoreState(self):
 
@@ -294,6 +294,13 @@ class Qnotero(QMainWindow, UiLoader):
 		"""Load a theme"""
 
 		theme = getConfig(u'theme')
+		iconOverride = getConfig(u'iconOverride')
+		if iconOverride:
+			self.isThemeIcon = False
+			self.iconName = u'../' + iconOverride
+		else:
+			self.isThemeIcon = True
+			self.iconName = u'qnotero'
 		mod = __import__(u'libqnotero._themes.%s' % theme.lower(), fromlist= \
 			[u'dummy'])
 		cls = getattr(mod, theme.capitalize())
