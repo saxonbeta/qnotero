@@ -1,4 +1,4 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 """
 This file is part of OpenSesame.
@@ -18,16 +18,17 @@ along with OpenSesame.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import sys
-if '--qt5' in sys.argv:
-	try:
-		import PyQt5
-		pyqt = 5
-	except:
-		pyqt = 4
+
+if '--qt4' in sys.argv:
+    pyqt = 4
 else:
-	pyqt = 4
+    try:
+        import PyQt5
+        pyqt = 5
+    except:
+        pyqt = 4
 
 if pyqt == 4:
-	import sip
-	sip.setapi(u'QString', 2)
-	sip.setapi(u'QVariant', 2)
+    import sip
+    sip.setapi(u'QString', 2)
+    sip.setapi(u'QVariant', 2)
