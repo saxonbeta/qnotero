@@ -69,30 +69,15 @@ class QnoteroResults(QListWidget):
         # Check the encodings of Zotero because this statement give errors
         # path = zoteroItem.fulltext.encode("latin-1")
         path = zoteroItem.fulltext
-        tmpName = '%s.pdf' % zoteroItem.filename_format()
-        tmpFile = os.path.join(tempfile.gettempdir(), tmpName)
-        suffix = 1
-        while os.path.exists(tmpFile):
-            tmpName = '%s-%d.pdf' % (zoteroItem.filename_format(), suffix)
-            tmpFile = os.path.join(tempfile.gettempdir(), tmpName)
-            suffix += 1
-        try:
-            shutil.copy(path, tmpFile)
-        except:
-            print("qnoteroResults.mousePressEvent(): failed to copy file, sorry...")
-            return
-
-        print("qnoteroResults.mousePressEvent(): prepare to copy %s" % path)
-        print("qnoteroResults.mousePressEvent(): prepare to copy (tmp) %s"
-              % tmpFile)
-
+        print("qnoteroResults.mousePressEvent(): prepare to open %s"
+              % path)
         try:
             if platform.system() == 'Darwin':  # macOS
-                subprocess.call(('open', tmpFile))
+                subprocess.call(('open', path))
             elif platform.system() == 'Windows':  # Windows
-                os.startfile(tmpFile)
+                os.startfile(path)
             else:  # linux variants
-                subprocess.call(('xdg-open', tmpFile))
+                subprocess.call(('xdg-open', path))
             print("qnoteroResults.mousePressEvent(): file opened")
         except Exception as exc:
             print("qnoteroResults.mousePressEvent(): failed to open file, sorry...")
