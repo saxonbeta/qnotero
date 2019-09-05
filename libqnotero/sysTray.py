@@ -36,7 +36,7 @@ class SysTray(QSystemTrayIcon):
 	
 		QSystemTrayIcon.__init__(self, qnotero)
 		self.qnotero = qnotero		
-		self.setIcon(self.qnotero.theme.icon("qnotero"))		
+		self.updateIcon()
 		self.menu = QMenu()
 		self.menu.addAction(self.qnotero.theme.icon("qnotero"), "Show",
 			self.qnotero.popUp)
@@ -47,7 +47,17 @@ class SysTray(QSystemTrayIcon):
 		self.setContextMenu(self.menu)
 		self.activated.connect(self.activate)
 		self.listenerActivated.connect(self.activate)
-				
+
+	def updateIcon(self):
+
+		"""
+		Reloads the systray icon according to the current settings
+		"""
+		
+		iconName = self.qnotero.iconName
+		overrideIconExt = None if self.qnotero.isThemeIcon else ''
+		self.setIcon(self.qnotero.theme.icon(iconName, overrideIconExt))
+
 	def activate(self, reason=None):
 	
 		"""

@@ -41,7 +41,7 @@ class Default:
 		self.setWindowProperties()
 		self.setScrollBars()
 		
-	def icon(self, iconName):
+	def icon(self, iconName, overrideIconExt=None):
 	
 		"""
 		Retrieves an icon from the theme
@@ -53,8 +53,8 @@ class Default:
 		A QIcon		
 		"""
 	
-		return QIcon(os.path.join(self._themeFolder, iconName) \
-			+ self._iconExt)
+		iconExt = self._iconExt if overrideIconExt is None else overrideIconExt
+		return QIcon(os.path.join(self._themeFolder, iconName) + iconExt)
 			
 	def iconExt(self):
 	

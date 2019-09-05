@@ -70,6 +70,7 @@ setup(
 			],
 		}],
 	data_files = [
+		('resources', glob.glob('resources/*.svg')),
 		('resources/default', glob.glob('resources/default/*')),
 		('resources/elementary', glob.glob('resources/elementary/*')),		
 		('resources/tango', glob.glob('resources/tango/*')),
