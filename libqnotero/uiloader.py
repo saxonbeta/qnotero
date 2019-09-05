@@ -18,7 +18,7 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import os
-from libqnotero.qt import QtCore, QtGui, uic
+from libqnotero.qt import QtCore, uic
 
 class UiLoader(QtCore.QObject):
     

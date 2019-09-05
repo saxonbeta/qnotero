@@ -23,7 +23,7 @@ import subprocess
 from libqnotero.qt.QtGui import QMainWindow, QListWidgetItem, QLabel, \
 	QDesktopWidget, QMessageBox
 from libqnotero.qt.QtCore import QSettings, QSize, QCoreApplication
-from libqnotero.qt import uic
+# from libqnotero.qt import uic
 from libqnotero.sysTray import SysTray
 from libqnotero.config import saveConfig, restoreConfig, setConfig, getConfig
 from libqnotero.qnoteroItemDelegate import QnoteroItemDelegate

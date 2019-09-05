@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import sys
 
 config = {
 	u"autoFire" : 500,
@@ -36,6 +35,7 @@ config = {
 	u"mdNoteproviderPath" : u"",
 	}
 
+
 def getConfig(setting):
 
 	"""
@@ -46,6 +46,7 @@ def getConfig(setting):
 	"""
 
 	return config[setting]
+
 
 def setConfig(setting, value):
 
@@ -59,6 +60,7 @@ def setConfig(setting, value):
 
 	config[setting] = value
 	config[u"cfgVer"] += 1
+
 
 def restoreConfig(settings):
 
@@ -82,6 +84,7 @@ def restoreConfig(settings):
 		else:
 			raise Exception(u'Unknown default type')
 		setConfig(setting, value)
+
 
 def saveConfig(settings):
 

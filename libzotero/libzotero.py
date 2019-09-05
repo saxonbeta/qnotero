@@ -161,7 +161,7 @@ class LibZotero(object):
 			return False
 
 		# Only update if necessary
-		if force or self.last_update == None or stats[8] > self.last_update:
+		if force or self.last_update is None or stats[8] > self.last_update:
 			t = time.time()
 			self.last_update = stats[8]
 			self.index = {}
@@ -196,7 +196,7 @@ class LibZotero(object):
 						# year, and can be split by '-' and '/' characters.
 						# TODO: Check new time format in Zotero
 						# https://github.com/zotero/zotero/commit/eb50067a411edd0935aebfbb272ab816a4f2d136
-						if item_value == None:
+						if item_value is None:
 							# Detect whether the date should be split
 							if u'/' in item[2]:
 								split = u'/'
@@ -205,7 +205,7 @@ class LibZotero(object):
 							else:
 								split = None
 							# If not, just use the last four characters
-							if split == None:
+							if split is None:
 								item_value = item[2][-4:]
 							# Else take the first slice that is four characters
 							else:
@@ -217,7 +217,7 @@ class LibZotero(object):
 					else:
 						item_value = item[2]
 					if item_id not in self.index:
-						self.index[item_id] = zotero_item(item_id, \
+						self.index[item_id] = zotero_item(item_id,
 							noteProvider=self.noteProvider)
 						self.index[item_id].key = key
 					if item_name == u"publicationTitle":
@@ -266,7 +266,7 @@ class LibZotero(object):
 			for item in self.cur.fetchall():
 				item_id = item[0]
 				if item_id not in deleted:
-					if item[1] != None:
+					if item[1] is not None:
 						att = item[1]
 						# If the attachment is stored in the Zotero folder, it is preceded
 						# by "storage:"
@@ -281,18 +281,18 @@ class LibZotero(object):
 								self.attachment_ext:
 								if item_id not in self.index:
 									self.index[item_id] = zotero_item(item_id)
-								self.cur.execute( \
-									u"select items.key from items where itemID = %d" \
+								self.cur.execute(
+									u"select items.key from items where itemID = %d"
 									% attachment_id)
 								key = self.cur.fetchone()[0]
-								self.index[item_id].fulltext = os.path.join( \
+								self.index[item_id].fulltext = os.path.join(
 									self.storage_path, key, item_attachment)
 						# If the attachment is linked, it is simply the full
 						# path to the attachment
 						else:
 							self.index[item_id].fulltext = att
 			self.cur.close()
-			print(u"libzotero.update(): indexing completed in %.3fs" \
+			print(u"libzotero.update(): indexing completed in %.3fs"
 				% (time.time() - t))
 		return True
 
@@ -340,8 +340,8 @@ class LibZotero(object):
 		if not self.update():
 			return []
 		if query in self.search_cache:
-			print( \
-				u"libzotero.search(): retrieving results for '%s' from cache" \
+			print(
+				u"libzotero.search(): retrieving results for '%s' from cache"
 				% query)
 			return self.search_cache[query]
 		t = time.time()
@@ -351,7 +351,7 @@ class LibZotero(object):
 			if item.match(terms):
 				results.append(item)
 		self.search_cache[query] = results
-		print(u"libzotero.search(): search for '%s' completed in %.3fs" % \
+		print(u"libzotero.search(): search for '%s' completed in %.3fs" %
 			(query, time.time() - t))
 		return results
 

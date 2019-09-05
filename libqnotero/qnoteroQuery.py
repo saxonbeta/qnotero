@@ -19,6 +19,7 @@ from libqnotero.qt.QtGui import QLineEdit
 from libqnotero.qt.QtCore import Qt, QTimer
 from libqnotero.config import getConfig
 
+
 class QnoteroQuery(QLineEdit):
 
 	"""The search input box"""

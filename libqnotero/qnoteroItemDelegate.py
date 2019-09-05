@@ -91,7 +91,7 @@ class QnoteroItemDelegate(QStyledItemDelegate):
 		text = record
 		zoteroItem = zoteroCache[text]
 		l = zoteroItem.full_format().split(u"\n")
-		if zoteroItem.fulltext == None:
+		if zoteroItem.fulltext is None:
 			pixmap = self.noPdfPixmap
 		else:
 			pixmap = self.pdfPixmap
@@ -102,7 +102,7 @@ class QnoteroItemDelegate(QStyledItemDelegate):
 			background = self.palette.Highlight
 			foreground = self.palette.HighlightedText
 			_note = zoteroItem.get_note()
-			if _note != None:
+			if _note is not None:
 				self.qnotero.showNoteHint()
 			else:
 				self.qnotero.hideNoteHint()

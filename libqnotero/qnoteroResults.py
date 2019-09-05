@@ -16,7 +16,7 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from libqnotero.qt.QtGui import QListWidget
-from libqnotero.qt.QtCore import Qt, QUrl, QMimeData
+from libqnotero.qt.QtCore import Qt
 import shutil
 import tempfile
 import subprocess
@@ -50,21 +50,21 @@ class QnoteroResults(QListWidget):
 
         if e.button() == Qt.RightButton:
             item = self.itemAt(e.pos())
-            if item == None:
+            if item is None:
                 return
             note = item.zoteroItem.get_note()
-            if note != None:
+            if note is not None:
                 self.qnotero.previewNote(note)
             return
 
         QListWidget.mousePressEvent(self, e)
         qnoteroItem = self.currentItem()
-        if qnoteroItem == None:
+        if qnoteroItem is None:
             return
         if not hasattr(qnoteroItem, "zoteroItem"):
             return
         zoteroItem = qnoteroItem.zoteroItem
-        if zoteroItem.fulltext == None:
+        if zoteroItem.fulltext is None:
             return
         # Check the encodings of Zotero because this statement give errors
         # path = zoteroItem.fulltext.encode("latin-1")

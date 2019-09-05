@@ -17,12 +17,10 @@ You should have received a copy of the GNU General Public License
 along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import sys
 import os
 import os.path
 import pkgutil
 from libqnotero.qt.QtGui import QDialog, QFileDialog, QMessageBox, QApplication
-from libqnotero.qt import uic
 from libqnotero.config import getConfig, setConfig
 from libqnotero.uiloader import UiLoader
 from libzotero.libzotero import valid_location
@@ -147,7 +145,7 @@ class Preferences(QDialog, UiLoader):
 		elif os.name == u"posix":
 			home = os.environ[u"HOME"]
 		zoteroPath = self.locate(home, u"zotero.sqlite")
-		if zoteroPath == None:
+		if zoteroPath is None:
 			QMessageBox.information(self, u"Unable to find Zotero",
 				u"Unable to find Zotero. Please specify the Zotero folder manually.")
 		else:

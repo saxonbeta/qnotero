@@ -142,13 +142,13 @@ class zoteroItem(object):
 					for author in self.authors:
 						if term in author.lower():
 							match = True
-				if not match and self.date != None and term_type in term_date:
+				if not match and self.date is not None and term_type in term_date:
 					if term in self.date:
 						match = True
-				if not match and self.title != None and term_type in \
+				if not match and self.title is not None and term_type in \
 					term_title and term in self.title.lower():
 					match = True
-				if not match and self.publication != None and term_type in \
+				if not match and self.publication is not None and term_type in \
 					term_publication and term in self.publication.lower():
 					match = True
 				if not match:
@@ -195,7 +195,7 @@ class zoteroItem(object):
 		A pretty representation of the date.
 		"""
 
-		if self.date == None:
+		if self.date is None:
 			return u"(Date unknown)"
 
 		return u"(%s)" % self.date
@@ -207,7 +207,7 @@ class zoteroItem(object):
 		A pretty representation of the title.
 		"""
 
-		if self.title == None:
+		if self.title is None:
 			return u"Unknown title"
 		return self.title
 
@@ -218,7 +218,7 @@ class zoteroItem(object):
 		A pretty representation of the publication (journal).
 		"""
 
-		if self.publication == None:
+		if self.publication is None:
 			return u"Unknown journal"
 		return self.publication
 
@@ -239,17 +239,17 @@ class zoteroItem(object):
 		label in Qnotero.
 		"""
 
-		if self.gnotero_format_str == None:
+		if self.gnotero_format_str is None:
 			s =  u"<b>" + self.format_author() + u" " + self.format_date() + \
 				u"</b>"
-			if self.title != None:
+			if self.title is not None:
 				s += u"\n<small>" + self.title
-			if self.publication != None:
+			if self.publication is not None:
 				s += u"\n<i>" + self.publication
-				if self.volume != None:
+				if self.volume is not None:
 					s += u", %s" % self.volume
 				s += u"</i>"
-				if self.issue != None:
+				if self.issue is not None:
 					s += u"(%s)" % self.issue
 			s += u"</small>"
 			self.gnotero_format_str = s.replace(u"&", u"&amp;")
@@ -262,19 +262,19 @@ class zoteroItem(object):
 		A pretty, extensive representation of the current item.
 		"""
 
-		if self.gnotero_format_str == None:
+		if self.gnotero_format_str is None:
 			s =  self.format_author() + u" " + self.format_date()
-			if self.title != None:
+			if self.title is not None:
 				s += u"\n" + self.title
-			if self.publication != None:
+			if self.publication is not None:
 				s += u"\n" + self.publication
-				if self.volume != None:
+				if self.volume is not None:
 					s += u", %s" % self.volume
-				if self.issue != None:
+				if self.issue is not None:
 					s += u"(%s)" % self.issue
 			else:
 				s += u"\n"
-			if self.tags != None:
+			if self.tags is not None:
 				s += u"\n" + self.format_tags()
 			self.gnotero_format_str = s
 		return self.gnotero_format_str
@@ -286,7 +286,7 @@ class zoteroItem(object):
 		A pretty, simple representation of the current item.
 		"""
 
-		if self.simple_format_str == None:
+		if self.simple_format_str is None:
 			self.simple_format_str = self.format_author() + u" " + \
 				self.format_date()
 		return self.simple_format_str
@@ -298,7 +298,7 @@ class zoteroItem(object):
 		A pretty filename format representation of the current item.
 		"""
 
-		if self.filename_format_str == None:
+		if self.filename_format_str is None:
 			self.filename_format_str = self.format_author() + u" " + \
 				self.format_date().replace(u"\\", u"")
 		return self.filename_format_str

@@ -17,7 +17,7 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 
 from libqnotero.qt.QtGui import QSystemTrayIcon, QMenu
 from libqnotero.qt.QtCore import Qt, QObject, pyqtSignal
-from libqnotero.config import getConfig
+# from libqnotero.config import getConfig
 
 class SysTray(QSystemTrayIcon):
 
@@ -56,8 +56,7 @@ class SysTray(QSystemTrayIcon):
 		Keyword arguments:
 		reason -- the reason for activation (default=None)
 		"""
-	
-		
+
 		if reason == QSystemTrayIcon.Context:
 			return		
 		if self.qnotero.isVisible():

@@ -49,7 +49,7 @@ class Listener(Thread):
 				s, comm_addr = self.sock.recvfrom(128)
 			except:
 				s = None
-			if s != None:
+			if s is not None:
 				print("listener.run(): received '%s'" % s)
 				if b"activate" == s[:8]:
 					print("listener.run(): activating")
