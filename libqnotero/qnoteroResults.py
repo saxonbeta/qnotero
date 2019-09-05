@@ -18,11 +18,9 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 from libqnotero.qt.QtGui import QListWidget
 from libqnotero.qt.QtGui import QDrag
 from libqnotero.qt.QtCore import Qt, QUrl, QMimeData
-import urllib
 import shutil
 import tempfile
 import os.path
-import time
 
 class QnoteroResults(QListWidget):
 
@@ -67,8 +65,9 @@ class QnoteroResults(QListWidget):
 		zoteroItem = qnoteroItem.zoteroItem
 		if zoteroItem.fulltext == None:
 			return
-		
-		path = zoteroItem.fulltext.encode("latin-1")
+		# Check the encodings of Zotero because this statement give errors
+		# path = zoteroItem.fulltext.encode("latin-1")
+		path = zoteroItem.fulltext
 		tmpName = '%s.pdf' % zoteroItem.filename_format()
 		tmpFile = os.path.join(tempfile.gettempdir(), tmpName)
 		suffix = 1
@@ -83,7 +82,7 @@ class QnoteroResults(QListWidget):
 			return
 			
 		print("qnoteroResults.mousePressEvent(): prepare to copy %s" % path)
-		print("qnoteroResults.mousePressEvent(): prepare to copy (tmp) %s" \
+		print("qnoteroResults.mousePressEvent(): prepare to copy (tmp) %s"
 			% tmpFile)
 		mimeData = QMimeData()
 		mimeData.setUrls([QUrl.fromLocalFile(tmpFile)])

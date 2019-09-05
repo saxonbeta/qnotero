@@ -26,6 +26,7 @@ import sys
 import time
 from libzotero.zotero_item import zoteroItem as zotero_item
 
+
 class LibZotero(object):
 
 	"""
@@ -37,7 +38,7 @@ class LibZotero(object):
 	attachment_query = u"""
 		select items.itemID, itemAttachments.path, itemAttachments.itemID
 		from items, itemAttachments
-		where items.itemID = itemAttachments.sourceItemID
+		where items.itemID = itemAttachments.parentItemID
 		"""
 
 	info_query = u"""
@@ -55,12 +56,11 @@ class LibZotero(object):
 		"""
 
 	author_query = u"""
-		select items.itemID, creatorData.lastName
-		from items, itemCreators, creators, creatorData, creatorTypes
+		select items.itemID, creators.lastName
+		from items, itemCreators, creators, creatorTypes
 		where
 			items.itemID = itemCreators.itemID
 			and itemCreators.creatorID = creators.creatorID
-			and creators.creatorDataID = creatorData.creatorDataID
 			and itemCreators.creatorTypeID = creatorTypes.creatorTypeID
 			and creatorTypes.creatorType != "editor"
 		order by itemCreators.orderIndex
@@ -194,6 +194,8 @@ class LibZotero(object):
 								break
 						# Dates can have months, days, and years, or just a
 						# year, and can be split by '-' and '/' characters.
+						# TODO: Check new time format in Zotero
+						# https://github.com/zotero/zotero/commit/eb50067a411edd0935aebfbb272ab816a4f2d136
 						if item_value == None:
 							# Detect whether the date should be split
 							if u'/' in item[2]:
@@ -272,8 +274,8 @@ class LibZotero(object):
 							item_attachment = att[8:]
 							# The item attachment appears to be encoded in
 							# latin-1 encoding, which we don't want, so recode.
-							item_attachment = item_attachment.encode(
-								'latin-1').decode('utf-8')
+							# Problematic code, check encoding in Zotero source code
+							# item_attachment = item_attachment.encode('latin-1').decode('utf-8')
 							attachment_id = item[2]
 							if item_attachment[-4:].lower() in \
 								self.attachment_ext:
@@ -352,6 +354,7 @@ class LibZotero(object):
 		print(u"libzotero.search(): search for '%s' completed in %.3fs" % \
 			(query, time.time() - t))
 		return results
+
 
 def valid_location(path):
 
