@@ -26,7 +26,6 @@ import sys
 import time
 from libzotero.zotero_item import zoteroItem as zotero_item
 
-
 class LibZotero(object):
 
 	"""
@@ -170,6 +169,7 @@ class LibZotero(object):
 			# Copy the zotero database to the gnotero copy
 			shutil.copyfile(self.zotero_database, self.gnotero_database)
 			self.conn = sqlite3.connect(self.gnotero_database)
+			self.conn.text_factory = decode_zotero_str
 			self.cur = self.conn.cursor()
 			# First create a list of deleted items, so we can ignore those later
 			deleted = []
