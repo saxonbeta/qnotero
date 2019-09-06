@@ -17,8 +17,6 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 
 from libqnotero.qt.QtGui import QListWidget
 from libqnotero.qt.QtCore import Qt
-import shutil
-import tempfile
 import subprocess
 import os
 import platform
@@ -65,6 +63,7 @@ class QnoteroResults(QListWidget):
             return
         zoteroItem = qnoteroItem.zoteroItem
         if zoteroItem.fulltext is None:
+            print('qnoteroResults.mousePressEvent(): no file attachment')
             return
 
         path = zoteroItem.fulltext
@@ -79,8 +78,7 @@ class QnoteroResults(QListWidget):
                 subprocess.call(('xdg-open', path))
             print("qnoteroResults.mousePressEvent(): file opened")
         except Exception as exc:
-            print("qnoteroResults.mousePressEvent(): failed to open file, sorry...")
-            print(exc)
+            print("qnoteroResults.mousePressEvent(): failed to open file, sorry... %s" % exc)
 
     def keyPressEvent(self, e):
 

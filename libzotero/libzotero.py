@@ -61,7 +61,6 @@ class LibZotero(object):
 			items.itemID = itemCreators.itemID
 			and itemCreators.creatorID = creators.creatorID
 			and itemCreators.creatorTypeID = creatorTypes.creatorTypeID
-			and creatorTypes.creatorType != "editor"
 		order by itemCreators.orderIndex
 		"""
 
@@ -231,7 +230,7 @@ class LibZotero(object):
                         self.index[item_id].doi = item_value
                     elif item_name == u"title":
                         self.index[item_id].title = str(item_value)
-            # Retrieve author information
+            # Retrieve author or editor information
             self.cur.execute(self.author_query)
             for item in self.cur.fetchall():
                 item_id = item[0]
