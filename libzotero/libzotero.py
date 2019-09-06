@@ -122,7 +122,7 @@ class LibZotero(object):
         self.special_dates = u"in press", u"submitted", u"in preparation", \
                              u"unpublished"
         # These extensions are recognized as fulltext attachments
-        self.attachment_ext = u".pdf", u"epub", u'djvu'
+        self.attachment_ext = u".pdf", u"epub", u'djvu', u'html'
 
         self.index = {}
         self.collection_index = []
