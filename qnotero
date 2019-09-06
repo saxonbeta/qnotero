@@ -59,7 +59,7 @@ if __name__ == "__main__":
 	qnotero.listener = listener
 	if not systray:
 		qnotero.popUp()
-	if listener != None:
+	if listener is not None:
 		listener.qnotero = qnotero
 		listener.start()
 	sys.exit(app.exec_())

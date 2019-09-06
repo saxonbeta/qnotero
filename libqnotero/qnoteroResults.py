@@ -66,8 +66,7 @@ class QnoteroResults(QListWidget):
         zoteroItem = qnoteroItem.zoteroItem
         if zoteroItem.fulltext is None:
             return
-        # Check the encodings of Zotero because this statement give errors
-        # path = zoteroItem.fulltext.encode("latin-1")
+
         path = zoteroItem.fulltext
         print("qnoteroResults.mousePressEvent(): prepare to open %s"
               % path)

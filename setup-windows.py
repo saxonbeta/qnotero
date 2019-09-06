@@ -34,7 +34,8 @@ import os
 import shutil
 import sys
 
-class safe_print(object):
+
+class SafePrint(object):
 	
 	"""
 	desc:
@@ -53,8 +54,9 @@ class safe_print(object):
 	def flush(self):
 		pass
 
+
 # Redirect standard output to safe printer
-sys.stdout = safe_print()
+sys.stdout = SafePrint()
 
 # Create empty destination folders
 if os.path.exists("dist"):

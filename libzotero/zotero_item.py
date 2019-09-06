@@ -26,6 +26,7 @@ term_title = None, u"title"
 
 cache = {}
 
+
 class zoteroItem(object):
 
 	"""Represents a single zotero item."""

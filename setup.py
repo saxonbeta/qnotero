@@ -22,31 +22,31 @@ from libqnotero.qnotero import Qnotero
 from distutils.core import setup
 
 setup(name="qnotero",
-	version = Qnotero.version,
-	description = "Standalone sidekick to the Zotero reference manager",
-	author = "Sebastiaan Mathot",
-	author_email = "s.mathot@cogsci.nl",
-	url = "http://www.cogsci.nl/",
-	scripts = ["qnotero"],
-	packages = [
-		"libqnotero",
-		"libzotero",
-		"libqnotero._themes",
-		"libzotero._noteProvider",
-		"libqnotero.qt"
-		],
-	package_data = {
-		"libqnotero" : ["ui/*.ui"],
-		},
-	data_files=[
-		("/usr/share/qnotero", ["COPYING"]),
-		("/usr/share/applications", ["data/qnotero.desktop"]),
-		("/usr/share/qnotero/resources", glob.glob("resources/*.svg")),
-		("/usr/share/qnotero/resources/default",
-			glob.glob("resources/default/*")),
-		("/usr/share/qnotero/resources/elementary",
-			glob.glob("resources/elementary/*")),
-		("/usr/share/qnotero/resources/tango",
-			glob.glob("resources/tango/*")),
-		]
-	)
+      version=Qnotero.version,
+      description="Standalone sidekick to the Zotero reference manager",
+      author="Sebastiaan Mathot",
+      author_email="s.mathot@cogsci.nl",
+      url="http://www.cogsci.nl/",
+      scripts=["qnotero"],
+      packages=[
+          "libqnotero",
+          "libzotero",
+          "libqnotero._themes",
+          "libzotero._noteProvider",
+          "libqnotero.qt"
+      ],
+      package_data={
+          "libqnotero": ["ui/*.ui"],
+      },
+      data_files=[
+          ("/usr/share/qnotero", ["COPYING"]),
+          ("/usr/share/applications", ["data/qnotero.desktop"]),
+          ("/usr/share/qnotero/resources", glob.glob("resources/*.svg")),
+          ("/usr/share/qnotero/resources/default",
+           glob.glob("resources/default/*")),
+          ("/usr/share/qnotero/resources/elementary",
+           glob.glob("resources/elementary/*")),
+          ("/usr/share/qnotero/resources/tango",
+           glob.glob("resources/tango/*")),
+      ]
+      )
