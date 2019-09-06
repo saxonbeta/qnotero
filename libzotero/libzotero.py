@@ -51,6 +51,7 @@ class LibZotero(object):
 				or fields.fieldName = "volume"
 				or fields.fieldName = "issue"
 				or fields.fieldName = "title"
+				or fields.fieldName = "url"
 				or fields.fieldName = "DOI")
 		"""
 
@@ -230,6 +231,8 @@ class LibZotero(object):
                         self.index[item_id].doi = item_value
                     elif item_name == u"title":
                         self.index[item_id].title = str(item_value)
+                    elif item_name == u'url':
+                        self.index[item_id].url = item_value
             # Retrieve author or editor information
             self.cur.execute(self.author_query)
             for item in self.cur.fetchall():
