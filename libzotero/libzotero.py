@@ -122,7 +122,7 @@ class LibZotero(object):
         self.special_dates = u"in press", u"submitted", u"in preparation", \
                              u"unpublished"
         # These extensions are recognized as fulltext attachments
-        self.attachment_ext = u".pdf", u".epub"
+        self.attachment_ext = u".pdf", u"epub", u'djvu'
 
         self.index = {}
         self.collection_index = []
@@ -273,10 +273,6 @@ class LibZotero(object):
                         # by "storage:"
                         if att[:8] == u"storage:":
                             item_attachment = att[8:]
-                            # The item attachment appears to be encoded in
-                            # latin-1 encoding, which we don't want, so recode.
-                            # Problematic code, check encoding in Zotero source code
-                            # item_attachment = item_attachment.encode('latin-1').decode('utf-8')
                             attachment_id = item[2]
                             if item_attachment[-4:].lower() in \
                                     self.attachment_ext:
