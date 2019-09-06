@@ -23,6 +23,7 @@ term_author = None, u"author"
 term_date = None, u"date", u"year"
 term_publication = None, u"publication", u"journal"
 term_title = None, u"title"
+term_doi = None, u"DOI"
 
 cache = {}
 
@@ -93,6 +94,10 @@ class zoteroItem(object):
 				self.key = item[u"key"]
 			else:
 				self.key = None
+			if u'DOI' in item:
+				self.doi = item[u'DOI']
+			else:
+				self.doi = None
 		else:
 			self.title = None
 			self.collections = []
@@ -104,6 +109,7 @@ class zoteroItem(object):
 			self.fulltext = None
 			self.date = None
 			self.key = None
+			self.doi = None
 			if isinstance(init, int):
 				self.id = init
 			else:
@@ -151,6 +157,9 @@ class zoteroItem(object):
 					match = True
 				if not match and self.publication is not None and term_type in \
 					term_publication and term in self.publication.lower():
+					match = True
+				if not match and self.doi is not None and term_type in \
+					term_doi and term in self.doi.lower():
 					match = True
 				if not match:
 					match_all = False

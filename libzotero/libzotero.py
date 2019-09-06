@@ -50,7 +50,8 @@ class LibZotero(object):
 				or fields.fieldName = "publicationTitle"
 				or fields.fieldName = "volume"
 				or fields.fieldName = "issue"
-				or fields.fieldName = "title")
+				or fields.fieldName = "title"
+				or fields.fieldName = "DOI")
 		"""
 
     author_query = u"""
@@ -192,7 +193,7 @@ class LibZotero(object):
                                 break
                         # Dates can have months, days, and years, or just a
                         # year, and can be split by '-' and '/' characters.
-                        # TODO: Check new time format in Zotero
+                        # TODO: Check time format in Zotero
                         # https://github.com/zotero/zotero/commit/eb50067a411edd0935aebfbb272ab816a4f2d136
                         if item_value is None:
                             # Detect whether the date should be split
@@ -226,6 +227,8 @@ class LibZotero(object):
                         self.index[item_id].volume = item_value
                     elif item_name == u"issue":
                         self.index[item_id].issue = item_value
+                    elif item_name == u"DOI":
+                        self.index[item_id].doi = item_value
                     elif item_name == u"title":
                         self.index[item_id].title = str(item_value)
             # Retrieve author information
