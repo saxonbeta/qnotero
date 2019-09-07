@@ -26,7 +26,7 @@ desc:
 	4. Rename `dist` and pack it into `.zip` for portable distribution
 ---
 """
-
+# Use cx_Freeze to make the windows installer
 from cx_Freeze import setup, Executable
 from libqnotero.qnotero import Qnotero
 import sys

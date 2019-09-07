@@ -20,12 +20,14 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 import os
 import os.path
 import pkgutil
+import platform
+import sys
 from libqnotero.qt.QtGui import QDialog, QFileDialog, QMessageBox, QApplication
 from libqnotero.config import getConfig, setConfig
 from libqnotero.uiloader import UiLoader
 from libzotero.libzotero import valid_location
 
-icons = [u'', u'qnotero-monochrome-white.svg', u'qnotero-monochrome-black.svg']
+icons = [u'', u'qnotero-ligth.svg', u'qnotero-dark.svg']
 
 
 class Preferences(QDialog, UiLoader):
@@ -62,10 +64,19 @@ class Preferences(QDialog, UiLoader):
         i = 0
         import libqnotero._themes
         themePath = os.path.dirname(libqnotero._themes.__file__)
-        for _, theme, _ in pkgutil.iter_modules([themePath]):
-            self.ui.comboBoxTheme.addItem(theme)
-            if theme == getConfig(u"theme").lower():
-                self.ui.comboBoxTheme.setCurrentIndex(i)
+        if (platform.system() == 'Windows' or platform.system() == 'Darwin') and hasattr(sys, 'frozen'):
+            themePath = os.path.join(os.path.dirname(sys.executable), u'themes')
+            print(themePath)
+            for dirname in next(os.walk(themePath))[1]:
+                self.ui.comboBoxTheme.addItem(dirname)
+                if dirname == getConfig(u"theme").lower():
+                    self.ui.comboBoxTheme.setCurrentIndex(i)
+            i += 1
+        else:
+            for _, theme, _ in pkgutil.iter_modules([themePath]):
+                self.ui.comboBoxTheme.addItem(theme)
+                if theme == getConfig(u"theme").lower():
+                    self.ui.comboBoxTheme.setCurrentIndex(i)
             i += 1
         icon = getConfig(u"iconOverride")
         self.ui.comboBoxIcon.setCurrentIndex(icons.index(icon) if icon in icons else 0)

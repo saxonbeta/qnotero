@@ -173,5 +173,7 @@ class Default:
 		Returns:
 		The name of the theme folder
 		"""
-
-        return "default"
+        if (platform.system() == 'Windows' or platform.system() == 'Darwin') and hasattr(sys, 'frozen'):
+            return 'themes/default'
+        else:
+            return 'default'
