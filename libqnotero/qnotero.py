@@ -20,10 +20,10 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 import sys
 import os
 import subprocess
+import platform
 from libqnotero.qt.QtGui import QMainWindow, QListWidgetItem, QLabel, \
     QDesktopWidget, QMessageBox
 from libqnotero.qt.QtCore import QSettings, QSize, QCoreApplication
-# from libqnotero.qt import uic
 from libqnotero.sysTray import SysTray
 from libqnotero.config import saveConfig, restoreConfig, setConfig, getConfig
 from libqnotero.qnoteroItemDelegate import QnoteroItemDelegate
@@ -301,8 +301,9 @@ class Qnotero(QMainWindow, UiLoader):
         else:
             self.isThemeIcon = True
             self.iconName = u'qnotero'
-        mod = __import__(u'libqnotero._themes.%s' % theme.lower(), fromlist= \
-            [u'dummy'])
+        if platform.system() == 'Darwin':
+            theme = u'default'
+        mod = __import__(u'libqnotero._themes.%s' % theme.lower(), fromlist=[u'dummy'])
         cls = getattr(mod, theme.capitalize())
         self.theme = cls(self)
 
