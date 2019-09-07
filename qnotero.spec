@@ -1,5 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+# PyInstaller spec file to create macOS bundle. Windows bundle is currently broken, see:
+# https://github.com/pyinstaller/pyinstaller/issues/3020
 block_cipher = None
 
 add_resources = [
