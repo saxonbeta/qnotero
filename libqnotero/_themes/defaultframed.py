@@ -17,9 +17,10 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 
 from libqnotero._themes.default import Default
 
+
 class Defaultframed(Default):
 
-	"""The Default theme with a wondow frame"""	
+	"""The Default theme with a window frame"""
 	
 	def __init__(self, qnotero):
 	
@@ -28,4 +29,3 @@ class Defaultframed(Default):
 	def setWindowProperties(self):
 	
 		pass
-		
