@@ -27,11 +27,8 @@ desc:
 ---
 """
 
-from distutils.core import setup
-import glob
-import py2exe
-import os
-import shutil
+from cx_Freeze import setup, Executable
+from libqnotero.qnotero import Qnotero
 import sys
 
 
@@ -58,42 +55,50 @@ class SafePrint(object):
 # Redirect standard output to safe printer
 sys.stdout = SafePrint()
 
-# Create empty destination folders
-if os.path.exists("dist"):
-	shutil.rmtree("dist")
-os.mkdir("dist")
+base = None
+if sys.platform == 'win32':
+    base = 'Win32GUI'
 
 # Setup options
-setup(
-	windows = [{
-		"script" : "qnotero",
-		'icon_resources': [
-			(0, os.path.join("data", "qnotero.ico"))
-			],
-		}],
-	data_files = [
-		('resources', glob.glob('resources/*.svg')),
-		('resources/default', glob.glob('resources/default/*')),
-		('resources/elementary', glob.glob('resources/elementary/*')),		
-		('resources/tango', glob.glob('resources/tango/*')),
-		('libqnotero/ui', glob.glob('libqnotero/ui/*')),
-		('data', ['data/qnotero.ico'])
-		],
-	options = {
-		'py2exe' : {
-			'compressed' : True,
-			'optimize': 2,
-			'bundle_files': 3,
-			'includes': [
-				'sip',
-				],
-			'packages' : [
+options = {
+    'build_exe': {
+        'optimize': '2',
+        'silent': '0',
+        'includes': [
+            'sip'
+        ],
+        'packages': [
 				"libqnotero",
 				"libzotero",
 				"libqnotero._themes",
 				"libzotero._noteProvider",
-				],					
-			"dll_excludes" : ["MSVCP90.DLL"],
-			},
-		},
-	)
+		],
+        'include_files': [
+            'resources',
+            'data\qnotero.ico',
+        ],
+    },
+    'bdist_msi_options': {
+        'upgrade_code': '{69620F3A-DC3A-11E2-B341-002210FE9B01E}',
+        'install_icon': 'data\qnotero.ico'
+    }
+}
+
+executables = [
+    Executable(
+        'qnotero',
+        base=base,
+        shortcutName='Qnotero',
+        shortcutDir='DesktopFolder',
+    )
+]
+
+setup(name="qnotero",
+      version=Qnotero.version,
+      description="Standalone sidekick to the Zotero reference manager",
+      author="E. Albiter",
+      author_email="ealbiter@gmail.com",
+      url="",
+      options=options,
+      executables=executables
+      )

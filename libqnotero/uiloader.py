@@ -18,7 +18,9 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import os
+import platform
 from libqnotero.qt import QtCore, uic
+
 
 class UiLoader(QtCore.QObject):
     
@@ -41,15 +43,13 @@ class UiLoader(QtCore.QObject):
         """
 
         path = os.path.dirname(__file__)
-        # If we are running from a frozen state (i.e. packaged by py2exe), we
+        # If we are running from a frozen state, we
         # need to find the UI files relative to the executable directory,
         # because the modules are packaged into library.zip.
-        if os.name == 'nt':
-            import imp
+        if platform.system() == 'Windows':
             import sys
-            if (hasattr(sys, 'frozen') or hasattr(sys, 'importers') or \
-                imp.is_frozen('__main__')):
+            if hasattr(sys, 'frozen') or hasattr(sys, 'importers'):
                 path = os.path.join(os.path.dirname(sys.executable),
-                    'libqnotero')
+                                    'lib\libqnotero')
         uiPath = os.path.join(path, 'ui', '%s.ui' % ui)
         self.ui = uic.loadUi(uiPath, self)
