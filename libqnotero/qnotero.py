@@ -88,7 +88,7 @@ class Qnotero(QMainWindow, UiLoader):
             e.ignore()
         else:
             e.accept()
-            if self.listener != None:
+            if self.listener is not None:
                 self.listener.alive = False
             sys.exit()
 
@@ -119,7 +119,7 @@ class Qnotero(QMainWindow, UiLoader):
 		query -- a query (default=None)
 		"""
 
-        if query != None:
+        if query is not None:
             self.showResultMsg(u"No results for %s" % query)
         else:
             self.showResultMsg(u"Please enter a search term")

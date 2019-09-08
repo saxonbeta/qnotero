@@ -16,8 +16,9 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from libqnotero.qt.QtGui import QSystemTrayIcon, QMenu
-from libqnotero.qt.QtCore import Qt, QObject, pyqtSignal
-# from libqnotero.config import getConfig
+from libqnotero.qt.QtCore import pyqtSignal
+import platform
+
 
 class SysTray(QSystemTrayIcon):
 
@@ -38,15 +39,11 @@ class SysTray(QSystemTrayIcon):
 		self.qnotero = qnotero		
 		self.updateIcon()
 		self.menu = QMenu()
-		self.menu.addAction(self.qnotero.theme.icon("qnotero"), "Show",
-			self.qnotero.popUp)
-		self.menu.addAction(self.qnotero.theme.icon("preferences"),
-			"Preferences", self.qnotero.preferences)
-		self.menu.addAction(self.qnotero.theme.icon("close"), "Close",
-			self.qnotero.close)
+		self.menu.addAction(self.qnotero.theme.icon("qnotero"), "Show",	self.qnotero.popUp)
+		self.menu.addAction(self.qnotero.theme.icon("preferences"),	"Preferences", self.qnotero.preferences)
+		self.menu.addAction(self.qnotero.theme.icon("close"), "Close", self.qnotero.close)
 		self.setContextMenu(self.menu)
 		self.activated.connect(self.activate)
-		self.listenerActivated.connect(self.activate)
 
 	def updateIcon(self):
 
@@ -67,8 +64,8 @@ class SysTray(QSystemTrayIcon):
 		reason -- the reason for activation (default=None)
 		"""
 
-		if reason == QSystemTrayIcon.Context:
-			return		
+		if reason == QSystemTrayIcon.Context or platform.system() == 'Darwin':
+			return
 		if self.qnotero.isVisible():
 			self.qnotero.popDown()
 		else:
