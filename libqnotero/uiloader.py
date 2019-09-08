@@ -48,7 +48,7 @@ class UiLoader(QtCore.QObject):
         # because the modules are packaged into library.zip.
         if platform.system() == 'Windows':
             import sys
-            if hasattr(sys, 'frozen') or hasattr(sys, 'importers'):
+            if hasattr(sys, 'frozen'):
                 path = os.path.join(os.path.dirname(sys.executable),
                                     'lib\libqnotero')
         uiPath = os.path.join(path, 'ui', '%s.ui' % ui)

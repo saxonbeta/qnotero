@@ -146,10 +146,9 @@ class Default:
                                          "resources", self.themeFolder())
         self._iconExt = self.iconExt()
         if not os.path.exists(self._themeFolder):
-            if platform.system() == 'Windows' or platform.system() == 'Darwin':
-                if hasattr(sys, 'frozen'):
-                    self._themeFolder = os.path.join(os.path.dirname(sys.executable),
-                                                     self.themeFolder())
+            if platform.system() == 'Darwin' and hasattr(sys, 'frozen'):
+                self._themeFolder = os.path.join(os.path.dirname(sys.executable),
+                                                 self.themeFolder())
             else:
                 self._themeFolder = os.path.join("/usr/share/qnotero/resources/",
                                                  self.themeFolder())
@@ -173,7 +172,7 @@ class Default:
 		Returns:
 		The name of the theme folder
 		"""
-        if (platform.system() == 'Windows' or platform.system() == 'Darwin') and hasattr(sys, 'frozen'):
+        if platform.system() == 'Darwin' and hasattr(sys, 'frozen'):
             return 'themes/default'
         else:
             return 'default'

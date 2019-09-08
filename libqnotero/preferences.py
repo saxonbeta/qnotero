@@ -64,20 +64,20 @@ class Preferences(QDialog, UiLoader):
         i = 0
         import libqnotero._themes
         themePath = os.path.dirname(libqnotero._themes.__file__)
-        if (platform.system() == 'Windows' or platform.system() == 'Darwin') and hasattr(sys, 'frozen'):
+        if platform.system() == 'Darwin' and hasattr(sys, 'frozen'):
             themePath = os.path.join(os.path.dirname(sys.executable), u'themes')
             print(themePath)
             for dirname in next(os.walk(themePath))[1]:
                 self.ui.comboBoxTheme.addItem(dirname)
                 if dirname == getConfig(u"theme").lower():
                     self.ui.comboBoxTheme.setCurrentIndex(i)
-            i += 1
+                i += 1
         else:
             for _, theme, _ in pkgutil.iter_modules([themePath]):
                 self.ui.comboBoxTheme.addItem(theme)
                 if theme == getConfig(u"theme").lower():
                     self.ui.comboBoxTheme.setCurrentIndex(i)
-            i += 1
+                i += 1
         icon = getConfig(u"iconOverride")
         self.ui.comboBoxIcon.setCurrentIndex(icons.index(icon) if icon in icons else 0)
         self.setStyleSheet(self.qnotero.styleSheet())
