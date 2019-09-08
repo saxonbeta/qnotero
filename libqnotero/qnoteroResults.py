@@ -76,7 +76,7 @@ class QnoteroResults(QListWidget):
             if platform.system() == 'Darwin':  # macOS
                 subprocess.call(('open', path))
             elif platform.system() == 'Windows':  # Windows
-                path = path.replace(u'\\', u'/')
+                path = os.path.normpath(path)
                 os.startfile(path)
             else:  # linux variants
                 subprocess.call(('xdg-open', path))
