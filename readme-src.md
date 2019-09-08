@@ -22,32 +22,31 @@ Freely available under the [GNU GPL 3](http://www.gnu.org/copyleft/gpl.html).
 
 Windows binaries can be downloaded from GitHub:
 
-- <https://github.com/smathot/qnotero/releases>
+- <https://github.com/saxonbeta/qnotero/releases>
 
-### Debian/ Ubuntu/ Linux Mint
+### Linux
+- Linux users can install Qnotero through the source code
 
-Ubuntu/ Linux Mint users can install Qnotero through the [Cogsci.nl PPA]:
+- In Arch Linux and derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
 
-	sudo add-apt-repository ppa:smathot/cogscinl
-	sudo apt-get update
-	sudo apt-get install qnotero
+      yay -S qnotero
 
-### Mac OS
+### mac OS
 
-There is no Qnotero package available for Mac OS. It should be possible to run Qnotero from source, if you have all the dependencies installed (notably Python 3 and PyQt5). Please let me know of any experiences running Qnotero on Mac OS (good or bad).
+mac Os users can download the compressed bundle, decompress and copy it to the application folder.
 
 ### Other operating systems
 
 For other operating systems, you can (try to) run Qnotero from source. Source code for stable releases can be downloaded from GitHub:
 
-- <https://github.com/smathot/qnotero/releases>
+- <https://github.com/saxonbeta/qnotero/releases>
 
 ## Dependencies
 
 Qnotero has the following dependencies.
 
 - [Python] -- As of Qnotero 1.0.0, Python >= 3.3 is required.
-- [PyQt4] -- Pass `--qt5` as command-line argument for experimental PyQt5 support.
+- [PyQt5] -- Pass `--qt4` as command-line argument for PyQt4 support.
 
 ## Gnote integration (Linux only)
 
@@ -55,45 +54,11 @@ If you have Gnote installed (a note-taking program for Linux), Qnotero automatic
 
     Duhamel et al. (1992) Science 255
 
-## Install Zotero standalone on Linux
-
-### Automated Zotero standalone installer script
-
-Linux users need to install Zotero standalone manually from a .tar.gz archive. This is a little inconvenient, which is why I created a simple installation script. This script downloads the latest version of Zotero standalone and creates a menu entry. If you use Ubuntu or Linux Mint, you can also use the PPA (see below).
-
-To run the automated installer, type (or copy-paste) the following in a terminal:
-
-    wget https://raw.github.com/smathot/zotero_installer/master/zotero_installer.sh \
-        -O /tmp/zotero_installer.sh
-    chmod +x /tmp/zotero_installer.sh
-    /tmp/zotero_installer.sh
-
-### Zotero standalone PPA for Ubuntu/ Linux Mint
-
-Ubuntu/ Linux Mint users can install Zotero standalone from the [Cogsci.nl PPA]. Note that this method of installation is essentially a wrapper around the installation script (see above) and will therefore provide some unusual terminal output.
-
-    sudo add-apt-repository ppa:smathot/cogscinl
-    sudo apt-get update
-    sudo apt-get install zotero-standalone
-
-If you have previously installed Zotero standalone using the installer script above, you will need to remove the installed files before re-installing from the PPA. For a local installation, these are:
-
-    /home/[user]/zotero
-    /home/[user]/.local/share/applications/zotero.desktop
-
-For a global installation, these are:
-
-    /opt/zotero
-    /usr/local/applications/zotero.desktop
-
 ## Support and feedback
 
 There are a number of channels through which you can ask questions and provide feedback:
 
 -   The comment section below is a good place for brief comments/ simple questions.
--   For (potentially) lengthy discussions, please use the [forum].
 
-[cogsci.nl ppa]: https://launchpad.net/~smathot/+archive/ubuntu/cogscinl
-[forum]: http://forum.cogsci.nl/
 [python]: https://www.python.org/
-[PyQt4]: http://www.riverbankcomputing.co.uk/software/pyqt/download
+[PyQt5]: http://www.riverbankcomputing.co.uk/software/pyqt/download
