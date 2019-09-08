@@ -191,28 +191,7 @@ class LibZotero(object):
                             if sd in item[2].lower():
                                 item_value = sd
                                 break
-                        # Dates can have months, days, and years, or just a
-                        # year, and can be split by '-' and '/' characters.
-                        # TODO: Check time format in Zotero
-                        # https://github.com/zotero/zotero/commit/eb50067a411edd0935aebfbb272ab816a4f2d136
-                        if item_value is None:
-                            # Detect whether the date should be split
-                            if u'/' in item[2]:
-                                split = u'/'
-                            elif u'-' in item[3]:
-                                split = u'-'
-                            else:
-                                split = None
-                            # If not, just use the last four characters
-                            if split is None:
-                                item_value = item[2][-4:]
-                            # Else take the first slice that is four characters
-                            else:
-                                l = item[2].split(split)
-                                for i in l:
-                                    if len(i) == 4:
-                                        item_value = i
-                                        break
+                        item_value = item[2][0:4]
                     else:
                         item_value = item[2]
                     if item_id not in self.index:
