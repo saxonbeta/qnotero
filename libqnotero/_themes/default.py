@@ -66,7 +66,7 @@ class Default:
 		An extension (.png, .svg, etc.)
 		"""
 
-        return ".png"
+        return ".svg"
 
     def iconWidget(self, iconName):
 
