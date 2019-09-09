@@ -22,51 +22,41 @@ import platform
 
 class SysTray(QSystemTrayIcon):
 
-	"""The Qnotero system tray icon"""
+    """The Qnotero system tray icon"""
 
-	listenerActivated = pyqtSignal()
-	
-	def __init__(self, qnotero):
-	
-		"""
-		Constructor
-		
-		Arguments:
-		qnotero -- a Qnotero instance
-		"""
-	
-		QSystemTrayIcon.__init__(self, qnotero)
-		self.qnotero = qnotero		
-		self.updateIcon()
-		self.menu = QMenu()
-		self.menu.addAction(self.qnotero.theme.icon("qnotero"), "Show",	self.qnotero.popUp)
-		self.menu.addAction(self.qnotero.theme.icon("preferences"),	"Preferences", self.qnotero.preferences)
-		self.menu.addAction(self.qnotero.theme.icon("close"), "Close", self.qnotero.close)
-		self.setContextMenu(self.menu)
-		self.activated.connect(self.activate)
+    listenerActivated = pyqtSignal()
 
-	def updateIcon(self):
+    def __init__(self, qnotero):
 
-		"""
-		Reloads the systray icon according to the current settings
-		"""
-		
-		iconName = self.qnotero.iconName
-		overrideIconExt = None if self.qnotero.isThemeIcon else ''
-		self.setIcon(self.qnotero.theme.icon(iconName, overrideIconExt))
+        """
+        Constructor
 
-	def activate(self, reason=None):
-	
-		"""
-		Handle clicks on the systray icon
-		
-		Keyword arguments:
-		reason -- the reason for activation (default=None)
-		"""
+        Arguments:
+        qnotero -- a Qnotero instance
+        """
 
-		if reason == QSystemTrayIcon.Context or platform.system() == 'Darwin':
-			return
-		if self.qnotero.isVisible():
-			self.qnotero.popDown()
-		else:
-			self.qnotero.popUp()
+        QSystemTrayIcon.__init__(self, qnotero)
+        self.qnotero = qnotero
+        self.setIcon(self.qnotero.theme.icon("qnotero"))
+        self.menu = QMenu()
+        self.menu.addAction(self.qnotero.theme.icon("qnotero"), "Show",	self.qnotero.popUp)
+        self.menu.addAction(self.qnotero.theme.icon("preferences"),	"Preferences", self.qnotero.preferences)
+        self.menu.addAction(self.qnotero.theme.icon("close"), "Close", self.qnotero.close)
+        self.setContextMenu(self.menu)
+        self.activated.connect(self.activate)
+
+    def activate(self, reason=None):
+
+        """
+        Handle clicks on the systray icon
+
+        Keyword arguments:
+        reason -- the reason for activation (default=None)
+        """
+
+        if reason == QSystemTrayIcon.Context or platform.system() == 'Darwin':
+            return
+        if self.qnotero.isVisible():
+            self.qnotero.popDown()
+        else:
+            self.qnotero.popUp()

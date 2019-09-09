@@ -27,8 +27,6 @@ from libqnotero.config import getConfig, setConfig
 from libqnotero.uiloader import UiLoader
 from libzotero.libzotero import valid_location
 
-icons = [u'', u'qnotero-ligth.svg', u'qnotero-dark.svg']
-
 
 class Preferences(QDialog, UiLoader):
     """Qnotero preferences dialog"""
@@ -78,8 +76,6 @@ class Preferences(QDialog, UiLoader):
                 if theme == getConfig(u"theme").lower():
                     self.ui.comboBoxTheme.setCurrentIndex(i)
                 i += 1
-        icon = getConfig(u"iconOverride")
-        self.ui.comboBoxIcon.setCurrentIndex(icons.index(icon) if icon in icons else 0)
         self.setStyleSheet(self.qnotero.styleSheet())
         self.adjustSize()
 
@@ -96,7 +92,6 @@ class Preferences(QDialog, UiLoader):
                   self.ui.checkBoxAutoUpdateCheck.isChecked())
         setConfig(u"zoteroPath", self.ui.lineEditZoteroPath.text())
         setConfig(u"theme", self.ui.comboBoxTheme.currentText().capitalize())
-        setConfig(u"iconOverride", icons[self.ui.comboBoxIcon.currentIndex()])
         self.qnotero.saveState()
         self.qnotero.reInit()
         QDialog.accept(self)
