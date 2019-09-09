@@ -209,7 +209,7 @@ class Qnotero(QMainWindow, UiLoader):
             self.noteProvider = GnoteProvider(self)
         self.zotero = LibZotero(getConfig(u"zoteroPath"), self.noteProvider)
         if hasattr(self, u"sysTray"):
-            self.sysTray.setIcon(self.theme.icon(u"qnotero"))
+            self.setIcon(self.qnotero.theme.icon("qnotero", ".png"))
 
     def restoreState(self):
 

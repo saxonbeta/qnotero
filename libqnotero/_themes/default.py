@@ -53,8 +53,12 @@ class Default:
 		Returns:
 		A QIcon		
 		"""
-        return QIcon(os.path.join(self._themeFolder, iconName) +
-                     self._iconExt)
+        if overrideIconExt is None:
+            return QIcon(os.path.join(self._themeFolder, iconName) +
+                         self._iconExt)
+        else:
+            return QIcon(os.path.join(self._themeFolder, iconName) +
+                         overrideIconExt)
 
     def iconExt(self):
 
