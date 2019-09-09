@@ -209,14 +209,14 @@ class Qnotero(QMainWindow, UiLoader):
             self.noteProvider = GnoteProvider(self)
         self.zotero = LibZotero(getConfig(u"zoteroPath"), self.noteProvider)
         if hasattr(self, u"sysTray"):
-            self.setIcon(self.qnotero.theme.icon("qnotero", ".png"))
+            self.sysTray.setIcon(self.theme.icon("qnotero", ".png"))
 
     def restoreState(self):
 
         """Restore the settings"""
 
         settings = QSettings(u"cogscinl", u"qnotero")
-        settings.beginGroup(u"Qnotero");
+        settings.beginGroup(u"Qnotero")
         restoreConfig(settings)
         settings.endGroup()
 
