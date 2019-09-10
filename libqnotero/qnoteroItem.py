@@ -17,6 +17,7 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 
 from libqnotero.qt.QtGui import QListWidgetItem
 
+
 class QnoteroItem(QListWidgetItem):
 
 	"""A single Qnotero result"""

@@ -17,11 +17,11 @@ You should have received a copy of the GNU General Public License
 along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from libqnotero.qt.QtGui import QStyledItemDelegate, QApplication, QStyle
-from libqnotero.qt.QtGui import QPen, QPalette, QFont, QFontMetrics
+from libqnotero.qt.QtGui import QStyledItemDelegate, QStyle
+from libqnotero.qt.QtGui import QFont, QFontMetrics
 from libqnotero.qt.QtCore import Qt, QRect, QSize
-from libqnotero.config import getConfig
 from libzotero.zotero_item import cache as zoteroCache
+
 
 class QnoteroItemDelegate(QStyledItemDelegate):
 

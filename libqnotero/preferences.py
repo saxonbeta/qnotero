@@ -64,7 +64,6 @@ class Preferences(QDialog, UiLoader):
         themePath = os.path.dirname(libqnotero._themes.__file__)
         if platform.system() == 'Darwin' and hasattr(sys, 'frozen'):
             themePath = os.path.join(os.path.dirname(sys.executable), u'themes')
-            print(themePath)
             for dirname in next(os.walk(themePath))[1]:
                 self.ui.comboBoxTheme.addItem(dirname)
                 if dirname == getConfig(u"theme").lower():
@@ -120,7 +119,7 @@ class Preferences(QDialog, UiLoader):
                     return dirpath
             for dirname in dirnames:
                 location = self.locate(os.path.join(dirpath, dirname), target)
-                if location != None:
+                if location is not None:
                     return location
         return None
 
@@ -150,6 +149,7 @@ class Preferences(QDialog, UiLoader):
 
         """Auto-detect the Zotero folder"""
 
+        # TODO: First check the Zotero's default location and if not located, perform a full search
         self.ui.labelLocatePath.show()
         if os.name == u"nt":
             home = os.environ[u"USERPROFILE"]
