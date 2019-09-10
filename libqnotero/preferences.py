@@ -149,13 +149,14 @@ class Preferences(QDialog, UiLoader):
 
         """Auto-detect the Zotero folder"""
 
-        # TODO: First check the Zotero's default location and if not located, perform a full search
         self.ui.labelLocatePath.show()
-        if os.name == u"nt":
+        if platform.system() == u"Windows":
             home = os.environ[u"USERPROFILE"]
-        elif os.name == u"posix":
+        elif platform.system() == u"Linux" or platform.system() == u'Darwin':
             home = os.environ[u"HOME"]
-        zoteroPath = self.locate(home, u"zotero.sqlite")
+        zoteroPath = self.locate(os.path.join(home, u'Zotero'), u"zotero.sqlite")
+        if zoteroPath is None:
+            zoteroPath = self.locate(home, u"zotero.sqlite")
         if zoteroPath is None:
             QMessageBox.information(self, u"Unable to find Zotero",
                                     u"Unable to find Zotero. Please specify the Zotero folder manually.")
