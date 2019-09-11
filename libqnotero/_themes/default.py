@@ -135,10 +135,11 @@ class Default:
 
     def setStyleSheet(self):
 
-        """Applies a stylesheet to Qnotero"""
+        """Applies a stylesheet to Qnotero
 
         self.qnotero.setStyleSheet(open(os.path.join(
-            self._themeFolder, "stylesheet.qss")).read())
+            self._themeFolder, "stylesheet.qss")).read()) """
+        pass
 
     def setThemeFolder(self):
 

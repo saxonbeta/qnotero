@@ -20,7 +20,7 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 import sys
 import os
 import subprocess
-from libqnotero.qt.QtGui import QMainWindow, QDesktopWidget, QMessageBox
+from libqnotero.qt.QtGui import QMainWindow, QDesktopWidget, QMessageBox, QStyleFactory
 from libqnotero.qt.QtCore import QSettings, QCoreApplication
 from libqnotero.sysTray import SysTray
 from libqnotero.config import saveConfig, restoreConfig, getConfig
@@ -35,7 +35,7 @@ class Qnotero(QMainWindow, UiLoader):
 
     version = '2.0.1'
 
-    def __init__(self, systray=True, debug=False, reset=False, parent=None):
+    def __init__(self, app, systray=True, debug=False, reset=False, parent=None):
 
         """
 		Constructor.
@@ -48,6 +48,7 @@ class Qnotero(QMainWindow, UiLoader):
 		"""
 
         QMainWindow.__init__(self, parent)
+        self.app = app
         self.loadUi('qnotero')
         if not reset:
             self.restoreState()
@@ -292,9 +293,20 @@ class Qnotero(QMainWindow, UiLoader):
         """Load a theme"""
 
         theme = getConfig(u'theme')
+        # Depending on theme set app style
+        print(QStyleFactory.keys())
+        if theme == u'default':
+            if u'macintosh' in QStyleFactory.keys():
+                self.app.setStyle(u'macintosh')
+            else:
+                self.app.setStyle(u'Fusion')
+        else:
+            # define a dark style
+            pass
         mod = __import__(u'libqnotero._themes.%s' % theme.lower(), fromlist=[u'dummy'])
         cls = getattr(mod, theme.capitalize())
         self.theme = cls(self)
+
 
     def setupUi(self):
 

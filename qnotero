@@ -55,7 +55,7 @@ if __name__ == "__main__":
 	systray = "--notray" not in sys.argv
 	app = QApplication(sys.argv)
 	app.setQuitOnLastWindowClosed(False)
-	qnotero = Qnotero(systray=systray, debug=True, reset=reset)
+	qnotero = Qnotero(app, systray=systray, debug=True, reset=reset)
 	qnotero.listener = listener
 	if not systray:
 		qnotero.popUp()
