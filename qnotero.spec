@@ -5,7 +5,6 @@
 block_cipher = None
 
 add_resources = [
-    ('resources/*.svg', 'themes/'),
     ('resources/default/*', 'themes/default/'),
     ('libqnotero/ui/*', 'libqnotero/ui/'),
 ]
@@ -58,7 +57,7 @@ coll = COLLECT(exe,
                )
 app = BUNDLE(coll,
              name='Qnotero.app',
-             icon='qnotero.icns',
+             icon=None,
              bundle_identifier='edu.ipn.esiqie.qnotero',
              info_plist={
                  'NSHighResolutionCapable': 'True'
