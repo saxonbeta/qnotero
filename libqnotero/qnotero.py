@@ -214,7 +214,7 @@ class Qnotero(QMainWindow, UiLoader):
 
         """Restore the settings"""
 
-        settings = QSettings(u"cogscinl", u"qnotero")
+        settings = QSettings(u"Qnotero", u"qnotero")
         settings.beginGroup(u"Qnotero")
         restoreConfig(settings)
         settings.endGroup()
@@ -239,7 +239,7 @@ class Qnotero(QMainWindow, UiLoader):
 
         """Save the settings"""
 
-        settings = QSettings(u"cogscinl", u"qnotero")
+        settings = QSettings(u"Qnotero", u"qnotero")
         settings.beginGroup(u"Qnotero")
         saveConfig(settings)
         settings.endGroup()
@@ -293,20 +293,10 @@ class Qnotero(QMainWindow, UiLoader):
         """Load a theme"""
 
         theme = getConfig(u'theme')
-        # Depending on theme set app style
-        print(QStyleFactory.keys())
-        if theme == u'default':
-            if u'macintosh' in QStyleFactory.keys():
-                self.app.setStyle(u'macintosh')
-            else:
-                self.app.setStyle(u'Fusion')
-        else:
-            # define a dark style
-            pass
+        self.app.setStyle(getConfig(u'appStyle'))
         mod = __import__(u'libqnotero._themes.%s' % theme.lower(), fromlist=[u'dummy'])
         cls = getattr(mod, theme.capitalize())
         self.theme = cls(self)
-
 
     def setupUi(self):
 

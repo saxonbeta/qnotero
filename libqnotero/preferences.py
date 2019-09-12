@@ -22,7 +22,8 @@ import os.path
 import pkgutil
 import platform
 import sys
-from libqnotero.qt.QtGui import QDialog, QFileDialog, QMessageBox, QApplication
+from libqnotero.qt.QtGui import QDialog, QFileDialog, QMessageBox,\
+    QApplication, QStyleFactory
 from libqnotero.config import getConfig, setConfig
 from libqnotero.uiloader import UiLoader
 from libzotero.libzotero import valid_location
@@ -75,7 +76,12 @@ class Preferences(QDialog, UiLoader):
                 if theme == getConfig(u"theme").lower():
                     self.ui.comboBoxTheme.setCurrentIndex(i)
                 i += 1
-        self.setStyleSheet(self.qnotero.styleSheet())
+        i = 0
+        for style in QStyleFactory.keys():
+            self.ui.comboBoxStyle.addItem(style)
+            if style == getConfig(u'appStyle'):
+                self.ui.comboBoxStyle.setCurrentIndex(i)
+            i += 1
         self.adjustSize()
 
     def accept(self):
@@ -91,6 +97,7 @@ class Preferences(QDialog, UiLoader):
                   self.ui.checkBoxAutoUpdateCheck.isChecked())
         setConfig(u"zoteroPath", self.ui.lineEditZoteroPath.text())
         setConfig(u"theme", self.ui.comboBoxTheme.currentText().capitalize())
+        setConfig(u'appStyle', self.ui.comboBoxStyle.currentText())
         self.qnotero.saveState()
         self.qnotero.reInit()
         QDialog.accept(self)

@@ -38,7 +38,6 @@ class Default:
 
         self.qnotero = qnotero
         self.setThemeFolder()
-        self.setStyleSheet()
         self.setWindowProperties()
         self.setScrollBars()
 
@@ -60,7 +59,8 @@ class Default:
             return QIcon(os.path.join(self._themeFolder, iconName) +
                          overrideIconExt)
 
-    def iconExt(self):
+    @staticmethod
+    def iconExt():
 
         """
 		Determines the file format of the icons
@@ -113,7 +113,8 @@ class Default:
         return QPixmap(os.path.join(self._themeFolder, pixmapName) \
                        + self._iconExt)
 
-    def roundness(self):
+    @staticmethod
+    def roundness():
 
         """
 		Determines the roundness of various widgets
@@ -122,24 +123,16 @@ class Default:
 		A roundness as a radius in pixels
 		"""
 
-        return 10
+        return 0
 
     def setScrollBars(self):
 
         """Set the scrollbar properties"""
 
-        self.qnotero.ui.listWidgetResults.setHorizontalScrollBarPolicy( \
+        self.qnotero.ui.listWidgetResults.setHorizontalScrollBarPolicy(
             Qt.ScrollBarAlwaysOff)
-        self.qnotero.ui.listWidgetResults.setVerticalScrollBarPolicy( \
-            Qt.ScrollBarAlwaysOff)
-
-    def setStyleSheet(self):
-
-        """Applies a stylesheet to Qnotero
-
-        self.qnotero.setStyleSheet(open(os.path.join(
-            self._themeFolder, "stylesheet.qss")).read()) """
-        pass
+        self.qnotero.ui.listWidgetResults.setVerticalScrollBarPolicy(
+             Qt.ScrollBarAlwaysOff)
 
     def setThemeFolder(self):
 

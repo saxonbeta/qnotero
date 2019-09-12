@@ -28,8 +28,9 @@ config = {
 	u"noteProvider" : u"gnote",
 	u"pdfReader" : u"xdg-open",
 	u"theme" : u"Default",
-	u"updateUrl" : \
-		u"http://files.cogsci.nl/software/qnotero/MOST_RECENT_VERSION.TXT",
+	u'appStyle': u'Fusion',
+	u"updateUrl":
+		u"",
 	u"pos" : u"Top right",
 	u"zoteroPath" : u"",
 	u"mdNoteproviderPath" : u"",
