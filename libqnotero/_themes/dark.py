@@ -15,16 +15,16 @@ You should have received a copy of the GNU General Public License
 along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from libqnotero._themes.default import Default
+from libqnotero._themes.light import Light
 
 
-class Defaultframed(Default):
+class Dark(Light):
 
 	"""The Default theme with a window frame"""
 	
 	def __init__(self, qnotero):
 	
-		Default.__init__(self, qnotero)	
+		Light.__init__(self, qnotero)
 		
 	def setWindowProperties(self):
 	

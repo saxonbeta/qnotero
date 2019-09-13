@@ -25,7 +25,7 @@ from libqnotero.qt.QtGui import QLabel
 from libqnotero.qt.QtCore import Qt
 
 
-class Default:
+class Light:
     """The default Qnotero theme"""
 
     def __init__(self, qnotero):

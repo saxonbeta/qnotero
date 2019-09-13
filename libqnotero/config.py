@@ -27,7 +27,7 @@ config = {
 	u"minQueryLength" : 3,
 	u"noteProvider" : u"gnote",
 	u"pdfReader" : u"xdg-open",
-	u"theme" : u"Default",
+	u"theme" : u"Light",
 	u'appStyle': u'Fusion',
 	u"updateUrl":
 		u"",
