@@ -16,6 +16,8 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from libqnotero._themes.light import Light
+import platform
+import sys
 
 
 class Dark(Light):
@@ -25,6 +27,12 @@ class Dark(Light):
 	def __init__(self, qnotero):
 	
 		Light.__init__(self, qnotero)
+
+	def themeFolder(self):
+		if platform.system() == 'Darwin' and hasattr(sys, 'frozen'):
+			return 'themes/dark'
+		else:
+			return 'dark'
 		
 	def setWindowProperties(self):
 	

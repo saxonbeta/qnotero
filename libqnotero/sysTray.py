@@ -37,12 +37,8 @@ class SysTray(QSystemTrayIcon):
 
         QSystemTrayIcon.__init__(self, qnotero)
         self.qnotero = qnotero
-        self.setIcon(self.qnotero.theme.icon("qnotero", ".png"))
         self.menu = QMenu()
-        self.menu.addAction(self.qnotero.theme.icon("show"), "Show",	self.qnotero.popUp)
-        self.menu.addAction(self.qnotero.theme.icon("preferences"),	"Preferences", self.qnotero.preferences)
-        self.menu.addAction(self.qnotero.theme.icon("close"), "Close", self.qnotero.close)
-        self.setContextMenu(self.menu)
+        self.re_init()
         self.activated.connect(self.activate)
 
     def activate(self, reason=None):
@@ -60,3 +56,11 @@ class SysTray(QSystemTrayIcon):
             self.qnotero.popDown()
         else:
             self.qnotero.popUp()
+
+    def re_init(self):
+        self.setIcon(self.qnotero.theme.icon("qnotero", ".png"))
+        self.menu.clear()
+        self.menu.addAction(self.qnotero.theme.icon("show"), "Show",	self.qnotero.popUp)
+        self.menu.addAction(self.qnotero.theme.icon("preferences"),	"Preferences", self.qnotero.preferences)
+        self.menu.addAction(self.qnotero.theme.icon("close"), "Close", self.qnotero.close)
+        self.setContextMenu(self.menu)
