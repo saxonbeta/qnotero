@@ -170,6 +170,6 @@ class Light:
 		The name of the theme folder
 		"""
         if platform.system() == 'Darwin' and hasattr(sys, 'frozen'):
-            return 'themes/default'
+            return 'themes/light'
         else:
-            return 'default'
+            return 'light'
