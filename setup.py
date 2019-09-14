@@ -41,12 +41,9 @@ setup(name="qnotero",
       data_files=[
           ("/usr/share/qnotero", ["COPYING"]),
           ("/usr/share/applications", ["data/qnotero.desktop"]),
-          ("/usr/share/qnotero/resources", glob.glob("resources/*.svg")),
-          ("/usr/share/qnotero/resources/default",
-           glob.glob("resources/default/*")),
-          ("/usr/share/qnotero/resources/elementary",
-           glob.glob("resources/elementary/*")),
-          ("/usr/share/qnotero/resources/tango",
-           glob.glob("resources/tango/*")),
+          ("/usr/share/qnotero/resources/dark",
+           glob.glob("resources/dark/*")),
+          ("/usr/share/qnotero/resources/light",
+           glob.glob("resources/light/*")),
       ]
       )
