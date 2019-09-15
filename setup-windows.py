@@ -31,30 +31,6 @@ from cx_Freeze import setup, Executable
 from libqnotero.qnotero import Qnotero
 import sys
 
-
-class SafePrint(object):
-	
-	"""
-	desc:
-		Used to redirect standard output, so that Python doesn't crash when
-		printing special characters to a terminal.
-	"""
-	
-	errors = 'strict'
-	encoding = 'utf-8'	
-	
-	def write(self, msg):	
-		if isinstance(msg, str):
-			msg = msg.encode('ascii', 'ignore')
-		sys.__stdout__.write(msg.decode('ascii'))
-		
-	def flush(self):
-		pass
-
-
-# Redirect standard output to safe printer
-sys.stdout = SafePrint()
-
 base = None
 if sys.platform == 'win32':
     base = 'Win32GUI'

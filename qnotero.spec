@@ -5,14 +5,16 @@
 block_cipher = None
 
 add_resources = [
-    ('resources/default/*', 'themes/default/'),
+    ('resources/light/*', 'themes/light/'),
+    ('resources/dark/*', 'themes/dark/'),
     ('libqnotero/ui/*', 'libqnotero/ui/'),
 ]
 
 add_imports = [
     "libqnotero.qnoteroQuery",
     "libqnotero.qnoteroResults",
-    "libqnotero._themes.default",
+    "libqnotero._themes.light",
+    "libqnotero._themes.dark",
     "libqnotero._themes.",
 ]
 
@@ -57,9 +59,10 @@ coll = COLLECT(exe,
                )
 app = BUNDLE(coll,
              name='Qnotero.app',
-             icon=None,
+             icon='./resources/qnotero.icns',
              bundle_identifier='edu.ipn.esiqie.qnotero',
              info_plist={
-                 'NSHighResolutionCapable': 'True'
+                 'NSHighResolutionCapable': 'True',
+                 'LSUIElement': 1
              }
              )
