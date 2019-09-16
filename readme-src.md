@@ -1,7 +1,5 @@
 Qnotero v%-- exec: ./qnotero --version --%
 
-*Copyright 2011-2015 Sebastiaan Mathôt*
-
 ## Overview
 
 %--
@@ -12,7 +10,7 @@ toc:
 
 ## What is Qnotero?
 
-Qnotero provides lightning quick access to your Zotero references. Zotero is an excellent open source reference manager, but it lacks a simple and direct way to access your references at the click of a button. That is why I created this simple program, which lives in the system tray and allows you to search through your references by Author and/ or Year of Publication. If a PDF file is attached to a reference you can open it directly from within Qnotero.
+Qnotero provides lightning quick access to your Zotero references. Zotero is an excellent open source reference manager, but it lacks a simple and direct way to access your references at the click of a button. Qnotero lives in the system tray and allows you to search through your references by Author, Year of Publication, and/or DOI, etc. If a PDF file is attached to a reference you can open it directly from within Qnotero, if not the URL of the reference is opened instead.
 
 Freely available under the [GNU GPL 3](http://www.gnu.org/copyleft/gpl.html).
 
@@ -22,12 +20,12 @@ Freely available under the [GNU GPL 3](http://www.gnu.org/copyleft/gpl.html).
 
 Windows binaries can be downloaded from GitHub:
 
-- <https://github.com/saxonbeta/qnotero/releases>
+- <https://github.com/ealbiter/qnotero/releases>
 
 ### Linux
-- Linux users can install Qnotero through the source code
+Linux users can install Qnotero through the source code
 
-- In Arch Linux and derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
+In Arch Linux and derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
 
       yay -S qnotero
 
@@ -39,26 +37,20 @@ mac Os users can download the compressed bundle, decompress and copy it to the a
 
 For other operating systems, you can (try to) run Qnotero from source. Source code for stable releases can be downloaded from GitHub:
 
-- <https://github.com/saxonbeta/qnotero/releases>
+- <https://github.com/ealbiter/qnotero/releases>
 
 ## Dependencies
 
 Qnotero has the following dependencies.
 
 - [Python] -- As of Qnotero 1.0.0, Python >= 3.3 is required.
-- [PyQt5] -- Pass `--qt4` as command-line argument for PyQt4 support.
+- [PyQt5] -- Pass `--qt4` as command-line argument for PyQt4 legacy support.
 
 ## Gnote integration (Linux only)
 
 If you have Gnote installed (a note-taking program for Linux), Qnotero automatically searches Gnote for a (section in a) note belonging to a specific article. Qnotero expects each note to be preceded by a bold line containing at least the name of the first author and the year of publication within parentheses, like so:
 
     Duhamel et al. (1992) Science 255
-
-## Support and feedback
-
-There are a number of channels through which you can ask questions and provide feedback:
-
--   The comment section below is a good place for brief comments/ simple questions.
 
 [python]: https://www.python.org/
 [PyQt5]: http://www.riverbankcomputing.co.uk/software/pyqt/download
