@@ -1,4 +1,5 @@
-Qnotero v2.0.1
+Qnotero v2.1.0
+
 
 ## Overview
 
@@ -11,6 +12,7 @@ Qnotero v2.0.1
 	- [Other operating systems](#other-operating-systems)
 - [Dependencies](#dependencies)
 - [Gnote integration (Linux only)](#gnote-integration-linux-only)
+
 
 ## What is Qnotero?
 
@@ -27,9 +29,9 @@ Windows binaries can be downloaded from GitHub:
 - <https://github.com/ealbiter/qnotero/releases>
 
 ### Linux
-- Linux users can install Qnotero through the source code
+Linux users can install Qnotero through the source code
 
-- In Arch Linux and derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
+In Arch Linux and derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
 
       yay -S qnotero
 
@@ -55,7 +57,6 @@ Qnotero has the following dependencies.
 If you have Gnote installed (a note-taking program for Linux), Qnotero automatically searches Gnote for a (section in a) note belonging to a specific article. Qnotero expects each note to be preceded by a bold line containing at least the name of the first author and the year of publication within parentheses, like so:
 
     Duhamel et al. (1992) Science 255
-
 
 [python]: https://www.python.org/
 [PyQt5]: http://www.riverbankcomputing.co.uk/software/pyqt/download

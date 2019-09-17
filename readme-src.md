@@ -7,7 +7,6 @@ toc:
  mindepth: 2
  exclude: [Overview]
 --%
-
 ## What is Qnotero?
 
 Qnotero provides lightning quick access to your Zotero references. Zotero is an excellent open source reference manager, but it lacks a simple and direct way to access your references at the click of a button. Qnotero lives in the system tray and allows you to search through your references by Author, Year of Publication, and/or DOI, etc. If a PDF file is attached to a reference you can open it directly from within Qnotero, if not the URL of the reference is opened instead.
