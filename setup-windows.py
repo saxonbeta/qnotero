@@ -56,7 +56,7 @@ options = {
     },
     'bdist_msi_options': {
         'upgrade_code': '{69620F3A-DC3A-11E2-B341-002210FE9B01E}',
-        'install_icon': 'data\qnotero.ico'
+        'install_icon': './data/qnotero.ico'
     }
 }
 
