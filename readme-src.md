@@ -9,7 +9,7 @@ toc:
 --%
 ## What is Qnotero?
 
-Qnotero provides lightning quick access to your Zotero references. Zotero is an excellent open source reference manager, but it lacks a simple and direct way to access your references at the click of a button. Qnotero lives in the system tray and allows you to search through your references by Author, Year of Publication, and/or DOI, etc. If a PDF file is attached to a reference you can open it directly from within Qnotero, if not the URL of the reference is opened instead.
+Qnotero provides lightning quick access to your Zotero references. Zotero is an excellent open source reference manager, but it lacks a simple and direct way to access your references at the click of a button. Qnotero lives in the system tray and allows you to search through your references by Author, Year of Publication, and/or DOI. If a PDF file is attached to a reference you can open it directly from within Qnotero, if not the URL of the reference is opened instead.
 
 Freely available under the [GNU GPL 3](http://www.gnu.org/copyleft/gpl.html).
 
@@ -22,15 +22,27 @@ Windows binaries can be downloaded from GitHub:
 - <https://github.com/ealbiter/qnotero/releases>
 
 ### Linux
-Linux users can install Qnotero through the source code
+Linux users can install Qnotero through the source code:
 
-In Arch Linux and derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
+1. Download the latest version of the source code from <https://github.com/ealbiter/qnotero/releases>, and uncompress it.
 
+2. Open a terminal and go to the folder where qnotero source code was uncompressed.
+
+3. Run the following command:
+
+```
+      sudo python setup.py install
+```
+
+In Arch Linux and its derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
+
+```
       yay -S qnotero
+```
 
 ### mac OS
 
-mac Os users can download the compressed bundle, decompress and copy it to the application folder.
+mac OS users can download the compressed bundle, uncompress it and copy to the application folder.
 
 ### Other operating systems
 
