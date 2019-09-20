@@ -61,6 +61,12 @@ class Preferences(QDialog, UiLoader):
         self.ui.checkBoxAutoUpdateCheck.setChecked(getConfig(u"autoUpdateCheck"))
         self.ui.lineEditZoteroPath.setText(getConfig(u"zoteroPath"))
         i = 0
+        while True:
+            self.ui.comboBoxPos.setCurrentIndex(i)
+            if self.ui.comboBoxPos.currentText() == getConfig(u'pos'):
+                break
+            i += 1
+        i = 0
         import libqnotero._themes
         themePath = os.path.dirname(libqnotero._themes.__file__)
         if platform.system() == 'Darwin' and hasattr(sys, 'frozen'):
