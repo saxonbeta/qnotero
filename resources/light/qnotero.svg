@@ -11,9 +11,9 @@
    height="24"
    version="1.1"
    id="svg10"
-   sodipodi:docname="zotero.svg"
+   sodipodi:docname="qnotero.svg"
    inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   inkscape:export-filename="/home/elim/PycharmProjects/qnotero/resources/default/zotero.png"
+   inkscape:export-filename="/home/elim/PycharmProjects/qnotero/resources/light/qnotero.png"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300">
   <metadata
@@ -43,9 +43,9 @@
      inkscape:window-height="734"
      id="namedview12"
      showgrid="false"
-     inkscape:zoom="26.026839"
-     inkscape:cx="7.5423354"
-     inkscape:cy="11.609889"
+     inkscape:zoom="29.941032"
+     inkscape:cx="4.5048755"
+     inkscape:cy="12.146174"
      inkscape:window-x="0"
      inkscape:window-y="34"
      inkscape:window-maximized="1"
@@ -56,22 +56,17 @@
      id="path2"
      inkscape:connector-curvature="0" />
   <path
-     style="opacity:0.2;fill:#ffffff"
-     d="m 15.394547,11.866027 a 2.274,2.2828 0 0 0 -0.3027,-1.1956 l -3.8633,-6.7168002 a 2.274,2.2828 0 0 0 -1.9697003,-1.1416 h -0.5 a 2.274,2.2828 0 0 1 1.9697003,1.1416 l 3.8633,6.7168002 a 2.274,2.2828 0 0 1 0.30273,1.1953 2.274,2.2828 0 0 1 -0.30273,1.0879 l -3.8633,6.7168 a 2.274,2.2828 0 0 1 -1.9697003,1.1416 h 0.5 a 2.274,2.2828 0 0 0 1.9697003,-1.143 l 3.8633,-6.716 a 2.274,2.2828 0 0 0 0.3027,-1.088 z"
-     id="path4"
-     inkscape:connector-curvature="0" />
-  <path
-     style="opacity:0.2"
+     style="opacity:0.35"
      d="m 8.15796,2.9771868 h -0.5 a 2.274,2.2828 0 0 0 -1.9687,1.1416 L 1.8259596,10.835587 a 2.274,2.2828 0 0 0 0,2.2832 l 3.8633004,6.7168 a 2.274,2.2828 0 0 0 1.9687,1.1416 h 0.5 a 2.274,2.2828 0 0 1 -1.9687,-1.1416 l -3.8633004,-6.7168 a 2.274,2.2828 0 0 1 0,-2.2832 L 6.18896,4.1183868 a 2.274,2.2828 0 0 1 1.969,-1.1416 z"
      id="path6"
      inkscape:connector-curvature="0" />
   <path
-     style="fill:none;stroke:#a81717;stroke-width:2;stroke-linecap:square;stroke-linejoin:round"
+     style="fill:none;stroke:#8b1717;stroke-width:2;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
      d="m 17,8 v 8 L 7,8 v 8"
      id="path8"
      inkscape:connector-curvature="0" />
   <path
-     style="opacity:0.2"
+     style="opacity:0.35"
      d="m 15.864486,3.0661549 h 0.5 a 2.274,2.2828 0 0 1 1.9687,1.1416 l 3.8633,6.7168001 a 2.274,2.2828 0 0 1 0,2.2832 l -3.8633,6.7168 a 2.274,2.2828 0 0 1 -1.9687,1.1416 h -0.5 a 2.274,2.2828 0 0 0 1.9687,-1.1416 l 3.8633,-6.7168 a 2.274,2.2828 0 0 0 0,-2.2832 l -3.863,-6.7172001 a 2.274,2.2828 0 0 0 -1.969,-1.1416 z"
      id="path6-3"
      inkscape:connector-curvature="0" />
