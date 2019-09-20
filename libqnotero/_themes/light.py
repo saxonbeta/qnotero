@@ -157,9 +157,7 @@ class Light:
     def setWindowProperties(self):
 
         """Set the window properties (frameless, etc.)"""
-        # Currently frameless windows don't work on macOS, so default theme is the same that defaultframed
-        if platform.system() != 'Darwin':
-            self.qnotero.setWindowFlags(Qt.Popup)
+        self.qnotero.setWindowFlags(Qt.FramelessWindowHint)
 
     def themeFolder(self):
 
