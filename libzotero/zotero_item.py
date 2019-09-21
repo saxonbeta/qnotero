@@ -24,6 +24,7 @@ term_date = None, u"date", u"year"
 term_publication = None, u"publication", u"journal"
 term_title = None, u"title"
 term_doi = None, u"DOI"
+term_abstract = None, u'abstractNote'
 
 cache = {}
 
@@ -102,6 +103,10 @@ class zoteroItem(object):
                 self.url = item[u'url']
             else:
                 self.url = None
+            if u'abstractNote' in item[u'abstractNote']:
+                self.abstract = item[u'abstractNote']
+            else:
+                self.abstract = item[u'abstractNote']
         else:
             self.title = None
             self.collections = []
@@ -114,6 +119,7 @@ class zoteroItem(object):
             self.date = None
             self.key = None
             self.doi = None
+            self.abstract = None
             self.url = None
             if isinstance(init, int):
                 self.id = init

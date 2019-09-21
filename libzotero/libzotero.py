@@ -176,7 +176,7 @@ class LibZotero(object):
             self.cur.execute(self.deleted_query)
             for item in self.cur.fetchall():
                 deleted.append(item[0])
-            # Retrieve information about date, publication, volume, issue and
+            # Retrieve information about date, publication, volume, issue, DOI and
             # title
             self.cur.execute(self.info_query)
             for item in self.cur.fetchall():
@@ -213,6 +213,8 @@ class LibZotero(object):
                         self.index[item_id].title = str(item_value)
                     elif item_name == u'url':
                         self.index[item_id].url = item_value
+                    elif item_name == u'abstractNote':
+                        self.index[item_id].abstract = item_value
             # Retrieve author or editor information
             self.cur.execute(self.author_query)
             for item in self.cur.fetchall():
