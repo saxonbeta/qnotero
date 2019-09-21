@@ -12,8 +12,8 @@
    version="1.1"
    id="svg10"
    sodipodi:docname="qnotero.svg"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   inkscape:export-filename="/home/elim/PycharmProjects/qnotero/resources/dark/qnotero.png"
+   inkscape:version="0.91 r13725"
+   inkscape:export-filename="/Users/elim/PycharmProjects/qnotero/resources/dark/qnotero.png"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300">
   <metadata
@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -39,34 +39,36 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1366"
-     inkscape:window-height="734"
+     inkscape:window-width="1280"
+     inkscape:window-height="755"
      id="namedview12"
      showgrid="false"
-     inkscape:zoom="29.941032"
-     inkscape:cx="8.6985676"
-     inkscape:cy="13.055931"
+     inkscape:zoom="22.69"
+     inkscape:cx="7.0521295"
+     inkscape:cy="9.2570303"
      inkscape:window-x="0"
-     inkscape:window-y="34"
+     inkscape:window-y="1"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg10" />
   <path
-     style="fill:#808080"
+     style="fill:#000000"
      d="m 21.999497,12.054223 a 2.274,2.2828 0 0 0 -0.3033,-1.1954 l -3.8631,-6.7171997 a 2.274,2.2828 0 0 0 -1.9694,-1.1414 H 8.1373965 a 2.274,2.2828 0 0 0 -1.9693,1.1414 l -3.8632,6.7171997 a 2.274,2.2828 0 0 0 0,2.2828 l 3.8632,6.7172 a 2.274,2.2828 0 0 0 1.9693,1.1414 h 7.7263005 a 2.274,2.2828 0 0 0 1.9696,-1.14 l 3.8631,-6.718 a 2.274,2.2828 0 0 0 0.30332,-1.0875 z"
      id="path2"
      inkscape:connector-curvature="0" />
   <path
-     style="opacity:0.35;fill:#1a1a1a"
+     style="opacity:1;fill:#666666"
      d="m 8.15796,2.9771868 h -0.5 a 2.274,2.2828 0 0 0 -1.9687,1.1416 L 1.8259596,10.835587 a 2.274,2.2828 0 0 0 0,2.2832 l 3.8633004,6.7168 a 2.274,2.2828 0 0 0 1.9687,1.1416 h 0.5 a 2.274,2.2828 0 0 1 -1.9687,-1.1416 l -3.8633004,-6.7168 a 2.274,2.2828 0 0 1 0,-2.2832 L 6.18896,4.1183868 a 2.274,2.2828 0 0 1 1.969,-1.1416 z"
      id="path6"
      inkscape:connector-curvature="0" />
   <path
-     style="fill:none;stroke:#8b1717;stroke-width:2;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+     style="fill:none;stroke:#f47e7e;stroke-width:2;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
      d="m 17,8 v 8 L 7,8 v 8"
      id="path8"
-     inkscape:connector-curvature="0" />
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="300"
+     inkscape:export-ydpi="300" />
   <path
-     style="opacity:0.35;fill:#1a1a1a;fill-opacity:1"
+     style="opacity:1;fill:#666666;fill-opacity:1"
      d="m 15.831087,2.9993569 h 0.5 a 2.274,2.2828 0 0 1 1.9687,1.1416 l 3.8633,6.7168001 a 2.274,2.2828 0 0 1 0,2.2832 l -3.8633,6.7168 a 2.274,2.2828 0 0 1 -1.9687,1.1416 h -0.5 a 2.274,2.2828 0 0 0 1.9687,-1.1416 l 3.8633,-6.7168 a 2.274,2.2828 0 0 0 0,-2.2832 l -3.863,-6.7172001 a 2.274,2.2828 0 0 0 -1.969,-1.1416 z"
      id="path6-3"
      inkscape:connector-curvature="0" />
