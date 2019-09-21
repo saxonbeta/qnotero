@@ -63,6 +63,7 @@ app = BUNDLE(coll,
              bundle_identifier='edu.ipn.esiqie.qnotero',
              info_plist={
                  'NSHighResolutionCapable': 'True',
-                 'LSUIElement': 1
+                 'LSUIElement': 1,
+                 'NSRequiresAquaSystemAppearance': 1,
              }
              )
