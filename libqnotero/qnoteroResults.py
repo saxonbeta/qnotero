@@ -35,33 +35,23 @@ class QnoteroResults(QListWidget):
 		"""
 
         QListWidget.__init__(self, qnotero)
+        self.itemDoubleClicked.connect(self.DoubleClicked)
+        self.itemClicked.connect(self.Clicked)
         self.setMouseTracking(True)
 
-    def mousePressEvent(self, e):
+    @staticmethod
+    def DoubleClicked(item):
 
         """
-		Start a drag operation
+		Open file attachment or URL
 
 		Arguments:
-		e -- a QMouseEvent
+		item -- a qnoteroItem
 		"""
 
-        if e.button() == Qt.RightButton:
-            item = self.itemAt(e.pos())
-            if item is None:
-                return
-            note = item.zoteroItem.get_note()
-            if note is not None:
-                self.qnotero.previewNote(note)
+        if item is None or not hasattr(item, "zoteroItem"):
             return
-
-        QListWidget.mousePressEvent(self, e)
-        qnoteroItem = self.currentItem()
-        if qnoteroItem is None:
-            return
-        if not hasattr(qnoteroItem, "zoteroItem"):
-            return
-        zoteroItem = qnoteroItem.zoteroItem
+        zoteroItem = item.zoteroItem
         if zoteroItem.fulltext is None and zoteroItem.url is None:
             print('qnoteroResults.mousePressEvent(): no file attachment nor url')
             return
@@ -82,7 +72,7 @@ class QnoteroResults(QListWidget):
                 subprocess.call(('xdg-open', path))
             print("qnoteroResults.mousePressEvent(): file opened")
         except Exception as exc:
-            print("qnoteroResults.mousePressEvent(): failed to open file, sorry... %s" % exc)
+            print("qnoteroResults.mousePressEvent(): failed to open file or URL, sorry... %s" % exc)
 
     def keyPressEvent(self, e):
 
@@ -99,3 +89,9 @@ class QnoteroResults(QListWidget):
             self.qnotero.ui.lineEditQuery.setFocus()
             return
         QListWidget.keyPressEvent(self, e)
+
+    def Clicked(self, item):
+        if item is None or not hasattr(item, "zoteroItem"):
+            return
+        zoteroItem = item.zoteroItem
+        self.qnotero.ui.textAbstract.setText(zoteroItem.abstract)

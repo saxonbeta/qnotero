@@ -122,6 +122,7 @@ class Qnotero(QMainWindow, UiLoader):
             self.showResultMsg(u"No results for %s" % query)
         else:
             self.showResultMsg(u"Please enter a search term")
+        self.ui.textAbstract.setText(None)
 
     def popDown(self):
 
@@ -142,16 +143,16 @@ class Qnotero(QMainWindow, UiLoader):
         s = self.size()
         pos = getConfig(u"pos")
         if pos == u"Top right":
-            x = r.left() + r.width() - s.width()
+            x = r.left() + r.width() - s.width() - 10
             y = r.top()
         elif pos == u"Top left":
-            x = r.left()
+            x = r.left() + 10
             y = r.top()
         elif pos == u"Bottom right":
-            x = r.left() + r.width() - s.width()
+            x = r.left() + r.width() - s.width() - 10
             y = r.top() + r.height() - s.height()
         elif pos == u"Bottom left":
-            x = r.left()
+            x = r.left() + 10
             y = r.top() + r.height() - s.height()
         else:
             x = r.left() + r.width() / 2 - s.width() / 2
@@ -240,7 +241,6 @@ class Qnotero(QMainWindow, UiLoader):
 		"""
 
         self.ui.labelNoteAvailable.hide()
-        self.ui.widgetNote.hide()
         self.ui.listWidgetResults.show()
         self.ui.listWidgetResults.clear()
         self.ui.lineEditQuery.needUpdate = False
@@ -292,9 +292,12 @@ class Qnotero(QMainWindow, UiLoader):
         self.ui.lineEditQuery.qnotero = self
         self.ui.listWidgetResults.qnotero = self
         self.ui.listWidgetResults.setItemDelegate(QnoteroItemDelegate(self))
-        self.ui.widgetNote.hide()
+        self.ui.pushButtonOpenNote.hide()
+        self.ui.pushButtonReturnFromNote.hide()
         self.ui.labelNoteAvailable.hide()
+        self.ui.labelNote.hide()
         self.ui.pushButtonOpenNote.clicked.connect(self.openNote)
+        self.ui.textAbstract.setFixedHeight(200)
 
     def showNoteHint(self):
 
