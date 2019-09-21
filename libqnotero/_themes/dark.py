@@ -33,7 +33,3 @@ class Dark(Light):
 			return 'themes/dark'
 		else:
 			return 'dark'
-		
-	def setWindowProperties(self):
-	
-		pass
