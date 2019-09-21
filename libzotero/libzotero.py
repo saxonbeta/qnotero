@@ -52,6 +52,7 @@ class LibZotero(object):
 				or fields.fieldName = "issue"
 				or fields.fieldName = "title"
 				or fields.fieldName = "url"
+				or fields.fieldName = "abstractNote"
 				or fields.fieldName = "DOI")
 		"""
 
