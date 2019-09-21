@@ -297,7 +297,13 @@ class Qnotero(QMainWindow, UiLoader):
         self.ui.labelNoteAvailable.hide()
         self.ui.labelNote.hide()
         self.ui.pushButtonOpenNote.clicked.connect(self.openNote)
-        self.ui.textAbstract.setFixedHeight(200)
+        if getConfig(u'showAbstract'):
+            self.ui.textAbstract.show()
+            self.ui.labelAbstract.show()
+            self.ui.textAbstract.setFixedHeight(200)
+        else:
+            self.ui.textAbstract.hide()
+            self.ui.labelAbstract.hide()
 
     def showNoteHint(self):
 

@@ -19,21 +19,20 @@ along with qnotero.  If not, see <http://www.gnu.org/licenses/>.
 
 
 config = {
-	u"autoFire" : 500,
-	u"autoUpdateCheck" : True,
-	u"cfgVer" : 0,
-	u"firstRun" : True,
-	u"listenerPort" : 43250,
-	u"minQueryLength" : 3,
-	u"noteProvider" : u"gnote",
-	u"pdfReader" : u"xdg-open",
-	u"theme" : u"Light",
+	u"autoFire": 500,
+	u"autoUpdateCheck": False,
+	u"cfgVer": 0,
+	u"firstRun": True,
+	u"listenerPort": 43250,
+	u"minQueryLength": 3,
+	u"noteProvider": u"gnote",
+	u"theme": u"Light",
 	u'appStyle': u'Fusion',
-	u"updateUrl":
-		u"",
-	u"pos" : u"Top right",
-	u"zoteroPath" : u"",
-	u"mdNoteproviderPath" : u"",
+	u"updateUrl": u"",
+	u"pos": u"Top right",
+	u"zoteroPath": u"",
+	u"mdNoteproviderPath": u"",
+	u'showAbstract': False,
 	}
 
 

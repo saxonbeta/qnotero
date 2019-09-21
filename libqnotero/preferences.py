@@ -59,11 +59,13 @@ class Preferences(QDialog, UiLoader):
         self.ui.pushButtonZoteroPathBrowse.clicked.connect(
             self.zoteroPathBrowse)
         self.ui.checkBoxAutoUpdateCheck.setChecked(getConfig(u"autoUpdateCheck"))
+        self.ui.checkBoxShowAbstract.setChecked(getConfig(u'showAbstract'))
         self.ui.lineEditZoteroPath.setText(getConfig(u"zoteroPath"))
         i = 0
+        pos = getConfig(u'pos')
         while True:
             self.ui.comboBoxPos.setCurrentIndex(i)
-            if self.ui.comboBoxPos.currentText() == getConfig(u'pos'):
+            if self.ui.comboBoxPos.currentText() == pos:
                 break
             i += 1
         i = 0
@@ -101,6 +103,8 @@ class Preferences(QDialog, UiLoader):
         setConfig(u"pos", self.ui.comboBoxPos.currentText())
         setConfig(u"autoUpdateCheck",
                   self.ui.checkBoxAutoUpdateCheck.isChecked())
+        setConfig(u'showAbstract',
+                  self.ui.checkBoxShowAbstract.isChecked())
         setConfig(u"zoteroPath", self.ui.lineEditZoteroPath.text())
         setConfig(u"theme", self.ui.comboBoxTheme.currentText().capitalize())
         setConfig(u'appStyle', self.ui.comboBoxStyle.currentText())

@@ -14,31 +14,57 @@
    <string>Preferences</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="2" column="0">
-    <widget class="QLabel" name="label">
+   <item row="3" column="0" colspan="4">
+    <widget class="QLabel" name="labelLocatePath">
      <property name="text">
-      <string>Zotero folder</string>
+      <string>TextLabel</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="lineEditZoteroPath"/>
-   </item>
-   <item row="8" column="0" colspan="4">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
+   <item row="6" column="1" colspan="3">
+    <widget class="QComboBox" name="comboBoxStyle"/>
    </item>
    <item row="2" column="2">
     <widget class="QPushButton" name="pushButtonZoteroPathBrowse">
      <property name="text">
       <string>Browse</string>
      </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_21">
+     <property name="text">
+      <string>App Style</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" colspan="3">
+    <widget class="QComboBox" name="comboBoxPos">
+     <item>
+      <property name="text">
+       <string>Top right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Top left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Bottom right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Bottom left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Center</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item row="2" column="3">
@@ -48,15 +74,22 @@
      </property>
     </widget>
    </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Position</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="lineEditZoteroPath"/>
+   </item>
    <item row="4" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Icon theme</string>
      </property>
     </widget>
-   </item>
-   <item row="4" column="1" colspan="3">
-    <widget class="QComboBox" name="comboBoxTheme"/>
    </item>
    <item row="0" column="0" colspan="4">
     <widget class="QWidget" name="widget" native="true">
@@ -90,30 +123,6 @@ p, li { white-space: pre-wrap; }
      </layout>
     </widget>
    </item>
-   <item row="3" column="0" colspan="4">
-    <widget class="QLabel" name="labelLocatePath">
-     <property name="text">
-      <string>TextLabel</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="label_21">
-     <property name="text">
-      <string>App Style</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1" colspan="3">
-    <widget class="QComboBox" name="comboBoxStyle"/>
-   </item>
-   <item row="7" column="0" colspan="4">
-    <widget class="QCheckBox" name="checkBoxAutoUpdateCheck">
-     <property name="text">
-      <string>Automatically check for updates on start-up</string>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="0" colspan="4">
     <widget class="QLabel" name="labelFirstRun">
      <property name="text">
@@ -127,40 +136,38 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_3">
+   <item row="2" column="0">
+    <widget class="QLabel" name="label">
      <property name="text">
-      <string>Position</string>
+      <string>Zotero folder</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="1" colspan="3">
-    <widget class="QComboBox" name="comboBoxPos">
-     <item>
-      <property name="text">
-       <string>Top right</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Top left</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Bottom right</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Bottom left</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Center</string>
-      </property>
-     </item>
+   <item row="4" column="1" colspan="3">
+    <widget class="QComboBox" name="comboBoxTheme"/>
+   </item>
+   <item row="9" column="0" colspan="4">
+    <widget class="QCheckBox" name="checkBoxAutoUpdateCheck">
+     <property name="text">
+      <string>Automatically check for updates on start-up</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0" colspan="4">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0" colspan="3">
+    <widget class="QCheckBox" name="checkBoxShowAbstract">
+     <property name="text">
+      <string>Show abstract information in the main window</string>
+     </property>
     </widget>
    </item>
   </layout>
