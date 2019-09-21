@@ -137,6 +137,7 @@ class Qnotero(QMainWindow, UiLoader):
         """Popup from the tray"""
 
         # Reposition the window
+        # TODO: Add code to identify the screen to show the main window
         r = QDesktopWidget().availableGeometry()
         s = self.size()
         pos = getConfig(u"pos")
@@ -219,22 +220,6 @@ class Qnotero(QMainWindow, UiLoader):
         restoreConfig(settings)
         settings.endGroup()
 
-    def runResult(self, listWidgetItem):
-
-        """Handle clicks on a result"""
-
-        if listWidgetItem.zoteroItem.fulltext is None:
-            return
-        pdf = listWidgetItem.zoteroItem.fulltext
-        if os.name == 'nt':
-            os.startfile(pdf)
-        else:
-            # For some reason, the file must be encoded with latin-1, despite
-            # the fact that it's a utf-8 encoded database and filesystem!
-            reader = getConfig('pdfReader').encode(sys.getfilesystemencoding())
-            pid = subprocess.Popen([reader, pdf])
-        self.popDown()
-
     def saveState(self):
 
         """Save the settings"""
@@ -307,7 +292,6 @@ class Qnotero(QMainWindow, UiLoader):
         self.ui.lineEditQuery.qnotero = self
         self.ui.listWidgetResults.qnotero = self
         self.ui.listWidgetResults.setItemDelegate(QnoteroItemDelegate(self))
-        self.ui.listWidgetResults.itemActivated.connect(self.runResult)
         self.ui.widgetNote.hide()
         self.ui.labelNoteAvailable.hide()
         self.ui.pushButtonOpenNote.clicked.connect(self.openNote)
