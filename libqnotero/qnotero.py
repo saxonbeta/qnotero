@@ -36,7 +36,7 @@ class Qnotero(QMainWindow, UiLoader):
 
     version = '2.1.0'
 
-    def __init__(self, app, systray=True, debug=False, reset=False, parent=None):
+    def __init__(self, app=None, systray=True, debug=False, reset=False, parent=None):
 
         """
 		Constructor.

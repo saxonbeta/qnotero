@@ -16,10 +16,7 @@
 #      along with Qnotero.  If not, see <https://www.gnu.org/licenses/>.
 #      Copyright (c) 2019 E. Albiter
 
-#  This file is part of Qnotero.
-#
-#
-#
+
 config = {
 	u"autoFire": 500,
 	u"autoUpdateCheck": False,
@@ -75,8 +72,7 @@ def restoreConfig(settings):
 
 	for setting, default in config.items():
 		if isinstance(default, bool):
-			# Booleans are saved as lowercase true/ false strings.
-			value = settings.value(setting, default) == 'true'
+			value = bool(settings.value(setting, default))
 		elif isinstance(default, str):
 			value = str(settings.value(setting, default))
 		elif isinstance(default, int):
