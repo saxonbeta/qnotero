@@ -76,7 +76,6 @@ def restoreConfig(settings):
             if platform.system() == u'Windows':
                 # On windows booleans are stored as all-lowercase string
                 value = settings.value(setting, default) == 'true'
-                print(value)
             else:
                 value = settings.value(setting, default)
         elif isinstance(default, str):
