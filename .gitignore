@@ -4,5 +4,4 @@ dist
 build
 .*
 releases
-*.iss
 /Output/

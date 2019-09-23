@@ -34,39 +34,6 @@ executables = [
     )
 ]
 
-shortcut_table = [
-    ("DesktopShortcut",        # Shortcut
-     "DesktopFolder",          # Directory_
-     "Qnotero",           # Name
-     "TARGETDIR",              # Component_
-     "[TARGETDIR]qnotero.exe",  # Target
-     None,                     # Arguments
-     None,                     # Description
-     None,                     # Hotkey
-     None,                     # Icon
-     None,                     # IconIndex
-     None,                     # ShowCmd
-     'TARGETDIR'               # WkDir
-     ),
-    ("DesktopShortcut",        # Shortcut
-     "DesktopFolder",          # Directory_
-     "Qnotero",           # Name
-     "TARGETDIR",              # Component_
-     "[TARGETDIR]qnotero.exe",  # Target
-     None,                     # Arguments
-     None,                     # Description
-     None,                     # Hotkey
-     None,                     # Icon
-     None,                     # IconIndex
-     None,                     # ShowCmd
-     'TARGETDIR'               # WkDir
-     )
-
-    ]
-
-# Now create the table dictionary
-msi_data = {"Shortcut": shortcut_table}
-
 # Setup options
 options = {
     'build_exe': {
@@ -83,14 +50,9 @@ options = {
 		],
         'include_files': [
             'resources',
-            '.\data\qnotero.ico',
+            'data\qnotero.ico',
         ],
     },
-    'bdist_msi_options': {
-        'upgrade_code': '{69620F3A-DC3A-11E2-B341-002210FE9B01E}',
-        'data': msi_data,
-        'install_icon': 'data\qnotero.ico'
-    }
 }
 
 

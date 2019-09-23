@@ -34,7 +34,7 @@ from libzotero.libzotero import LibZotero
 class Qnotero(QMainWindow, UiLoader):
     """The main class of the Qnotero GUI"""
 
-    version = '2.1.0'
+    version = '2.1.1'
 
     def __init__(self, app=None, systray=True, debug=False, reset=False, parent=None):
 
