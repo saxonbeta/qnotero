@@ -74,7 +74,6 @@ def restoreConfig(settings):
     for setting, default in config.items():
         if isinstance(default, bool):
             if platform.system() == u'Darwin':
-                # TODO: The problem is on macOS, debug this code
                 value = bool(settings.value(setting, default))
             else:
                 value = settings.value(setting, default) == 'true'

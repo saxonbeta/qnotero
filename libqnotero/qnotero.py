@@ -83,13 +83,15 @@ class Qnotero(QMainWindow, UiLoader):
 		e -- a QCloseEvent
 		"""
 
-        if self.minimizeOnClose:
+        if self.minimizeOnClose and not e.spontaneous():
             self.popDown()
             e.ignore()
+            print(u'qnotero.closeEvent(): Hiding to system tray')
         else:
             e.accept()
             if self.listener is not None:
                 self.listener.alive = False
+            print(u'qnotero.closeEvent(): Exiting Qnotero, bye...')
             sys.exit()
 
     def hideNoteHint(self):
