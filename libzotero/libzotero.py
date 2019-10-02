@@ -58,6 +58,22 @@ def parse_query(query):
     return terms
 
 
+def valid_location(path):
+    """
+	Checks if a given path is a valid Zotero folder, i.e., if it it contains
+	zotero.sqlite.
+
+	Arguments:
+	path		--	The path to check.
+
+	Returns:
+	True if path is a valid Zotero folder, False otherwise.
+	"""
+
+    assert (isinstance(path, str))
+    return os.path.exists(os.path.join(path, u"zotero.sqlite"))
+
+
 class LibZotero(object):
     """
 	Libzotero provides access to the zotero database.
@@ -319,12 +335,12 @@ class LibZotero(object):
                                     u"select items.key from items where itemID = %d"
                                     % attachment_id)
                                 key = self.cur.fetchone()[0]
-                                self.index[item_id].fulltext = os.path.join(
-                                    self.storage_path, key, item_attachment)
+                                self.index[item_id].fulltext.append(os.path.join(
+                                    self.storage_path, key, item_attachment))
                         # If the attachment is linked, it is simply the full
                         # path to the attachment
                         else:
-                            self.index[item_id].fulltext = att
+                            self.index[item_id].fulltext.append(att)
             self.cur.close()
             print(u"libzotero.update(): indexing completed in %.3fs"
                   % (time.time() - t))
@@ -360,18 +376,3 @@ class LibZotero(object):
               (query, time.time() - t))
         return results
 
-
-def valid_location(path):
-    """
-	Checks if a given path is a valid Zotero folder, i.e., if it it contains
-	zotero.sqlite.
-
-	Arguments:
-	path		--	The path to check.
-
-	Returns:
-	True if path is a valid Zotero folder, False otherwise.
-	"""
-
-    assert (isinstance(path, str))
-    return os.path.exists(os.path.join(path, u"zotero.sqlite"))

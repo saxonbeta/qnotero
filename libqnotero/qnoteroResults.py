@@ -56,10 +56,10 @@ class QnoteroResults(QListWidget):
         if zoteroItem.fulltext is None and zoteroItem.url is None:
             print('qnoteroResults.mousePressEvent(): no file attachment nor url')
             return
-        if zoteroItem.fulltext is None:
+        if len(zoteroItem.fulltext) == 0:
             path = zoteroItem.url
         else:
-            path = zoteroItem.fulltext
+            path = zoteroItem.fulltext[0]
 
         print("qnoteroResults.mousePressEvent(): prepare to open %s"
               % path)

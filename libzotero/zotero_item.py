@@ -83,7 +83,7 @@ class zoteroItem(object):
             if u"fulltext" in item:
                 self.fulltext = item[u"fulltext"]
             else:
-                self.fulltext = None
+                self.fulltext = []
             if u"collections" in item:
                 self.collections = item[u"collections"]
             else:
@@ -116,7 +116,7 @@ class zoteroItem(object):
             self.tags = []
             self.issue = None
             self.volume = None
-            self.fulltext = None
+            self.fulltext = []
             self.date = None
             self.key = None
             self.doi = None
