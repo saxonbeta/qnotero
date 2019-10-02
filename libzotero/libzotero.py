@@ -24,7 +24,38 @@ import os.path
 import shutil
 import sys
 import time
+from libqnotero.config import getConfig
 from libzotero.zotero_item import zoteroItem as zotero_item
+
+
+def parse_query(query):
+
+    """
+    Parses a text search query into a list of tuples, which are acceptable
+    for zotero_item.match().
+
+    Argument:
+    query		--	A search query.
+
+    Returns:
+    A list of tuples.
+    """
+
+    # Make sure that spaces are handled correctly after
+    # semicolons. E.g., Author: Mathot
+    while u": " in query:
+        query = query.replace(u": ", u":")
+    # Parse the terms into a suitable format
+    terms = []
+    # Check if the criterium is type-specified, like "author: doe"
+    # import shlex
+    for term in query.strip().lower().split():
+        s = term.split(u":")
+        if len(s) == 2:
+            terms.append((s[0].strip(), s[1].strip()))
+        else:
+            terms.append((None, term.strip()))
+    return terms
 
 
 class LibZotero(object):
@@ -53,9 +84,25 @@ class LibZotero(object):
 				or fields.fieldName = "issue"
 				or fields.fieldName = "title"
 				or fields.fieldName = "url"
-				or fields.fieldName = "abstractNote"
 				or fields.fieldName = "DOI")
 		"""
+
+    abs_info_query = u"""
+    		select items.itemID, fields.fieldName, itemDataValues.value, items.key
+    		from items, itemData, fields, itemDataValues
+    		where
+    			items.itemID = itemData.itemID
+    			and itemData.fieldID = fields.fieldID
+    			and itemData.valueID = itemDataValues.valueID
+    			and (fields.fieldName = "date"
+    				or fields.fieldName = "publicationTitle"
+    				or fields.fieldName = "volume"
+    				or fields.fieldName = "issue"
+    				or fields.fieldName = "title"
+    				or fields.fieldName = "url"
+    				or fields.fieldName = "abstractNote"
+    				or fields.fieldName = "DOI")
+    		"""
 
     author_query = u"""
 		select items.itemID, creators.lastName
@@ -173,13 +220,18 @@ class LibZotero(object):
             self.conn = sqlite3.connect(self.gnotero_database)
             self.cur = self.conn.cursor()
             # First create a list of deleted items, so we can ignore those later
+            # TODO: Also get retracted items to ignore them too
             deleted = []
             self.cur.execute(self.deleted_query)
             for item in self.cur.fetchall():
                 deleted.append(item[0])
-            # Retrieve information about date, publication, volume, issue, DOI and
-            # title
-            self.cur.execute(self.info_query)
+            # Retrieve information about date, publication, volume, issue, DOI,
+            # title, and abstract if the option is selected
+            if getConfig(u'showAbstract'):
+                query = self.abs_info_query
+            else:
+                query = self.info_query
+            self.cur.execute(query)
             for item in self.cur.fetchall():
                 item_id = item[0]
                 key = item[3]
@@ -278,35 +330,6 @@ class LibZotero(object):
                   % (time.time() - t))
         return True
 
-    def parse_query(self, query):
-
-        """
-		Parses a text search query into a list of tuples, which are acceptable
-		for zotero_item.match().
-
-		Argument:
-		query		--	A search query.
-
-		Returns:
-		A list of tuples.
-		"""
-
-        # Make sure that spaces are handled correctly after
-        # semicolons. E.g., Author: Mathot
-        while u": " in query:
-            query = query.replace(u": ", u":")
-        # Parse the terms into a suitable format
-        terms = []
-        # Check if the criterium is type-specified, like "author: doe"
-        # import shlex
-        for term in query.strip().lower().split():
-            s = term.split(u":")
-            if len(s) == 2:
-                terms.append((s[0].strip(), s[1].strip()))
-            else:
-                terms.append((None, term.strip()))
-        return terms
-
     def search(self, query):
 
         """
@@ -327,7 +350,7 @@ class LibZotero(object):
                 % query)
             return self.search_cache[query]
         t = time.time()
-        terms = self.parse_query(query)
+        terms = parse_query(query)
         results = []
         for item_id, item in self.index.items():
             if item.match(terms):
