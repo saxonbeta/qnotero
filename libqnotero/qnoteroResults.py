@@ -16,7 +16,7 @@
 
 #
 
-from libqnotero.qt.QtGui import QListWidget
+from libqnotero.qt.QtGui import QListWidget, QInputDialog
 from libqnotero.qt.QtCore import Qt
 import subprocess
 import os
@@ -40,8 +40,7 @@ class QnoteroResults(QListWidget):
         self.itemClicked.connect(self.Clicked)
         self.setMouseTracking(True)
 
-    @staticmethod
-    def DoubleClicked(item):
+    def DoubleClicked(self, item):
 
         """
 		Open file attachment or URL
@@ -56,10 +55,18 @@ class QnoteroResults(QListWidget):
         if zoteroItem.fulltext is None and zoteroItem.url is None:
             print('qnoteroResults.mousePressEvent(): no file attachment nor url')
             return
+        # If there is no a fulltext item open the URL of the entry
         if len(zoteroItem.fulltext) == 0:
             path = zoteroItem.url
-        else:
+        # Only one attachment
+        elif len(zoteroItem.fulltext) == 1:
             path = zoteroItem.fulltext[0]
+        # If there are more than one
+        else:
+            path, okPressed = QInputDialog.getItem(self, u'Attachments',
+                                                   u'Select attachment to open:', zoteroItem.fulltext, 0, False)
+            if path is None or not okPressed:
+                return
 
         print("qnoteroResults.mousePressEvent(): prepare to open %s"
               % path)
