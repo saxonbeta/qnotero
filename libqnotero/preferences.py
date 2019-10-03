@@ -111,6 +111,7 @@ class Preferences(QDialog, UiLoader):
         setConfig(u'appStyle', self.ui.comboBoxStyle.currentText())
         self.qnotero.saveState()
         self.qnotero.reInit()
+        self.qnotero.zotero.update(True)
         self.qnotero.sysTray.re_init()
         QDialog.accept(self)
 

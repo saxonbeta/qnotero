@@ -207,6 +207,10 @@ class Qnotero(QMainWindow, UiLoader):
         self.setTheme()
         self.setupUi()
         self.noteProvider = []
+        self.noResults()
+        self.ui.listWidgetResults.clear()
+        self.ui.textAbstract.setText(u'')
+        self.ui.lineEditQuery.clear()
         if getConfig(u'noteProvider') == u'gnote':
             from libzotero._noteProvider.gnoteProvider import GnoteProvider
             print(u"qnotero.reInit(): using GnoteProvider")
