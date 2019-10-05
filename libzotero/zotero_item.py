@@ -202,7 +202,7 @@ class zoteroItem(object):
 
         if not self.authors:
             return u"Unknown author"
-        elif len(self.authors) > 3:
+        elif len(self.authors) >= 3:
             return u"%s et al." % self.authors[0]
         elif len(self.authors) == 2:
             return self.authors[0] + u" & " + self.authors[1]
