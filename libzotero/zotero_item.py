@@ -200,15 +200,14 @@ class zoteroItem(object):
         A pretty representation of the author.
         """
 
-        if self.authors == []:
-            return u"Unkown author"
-        if len(self.authors) > 5:
+        if not self.authors:
+            return u"Unknown author"
+        elif len(self.authors) > 3:
             return u"%s et al." % self.authors[0]
-        if len(self.authors) > 2:
-            return u", ".join(self.authors[:-1]) + u", & " + self.authors[-1]
-        if len(self.authors) == 2:
+        elif len(self.authors) == 2:
             return self.authors[0] + u" & " + self.authors[1]
-        return self.authors[0]
+        else:
+            return self.authors[0]
 
     def format_date(self):
 
