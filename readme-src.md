@@ -23,21 +23,21 @@ Windows binaries can be downloaded from GitHub:
 
 - <https://github.com/ealbiter/qnotero/releases>
 
-### Linux
-- Linux users can install Qnotero through the source code:
+### Ubuntu Linux and its derivatives
+Ubuntu Linux users can install Qnotero through the source code:
 
-  1. Download the latest version of the source code from <https://github.com/ealbiter/qnotero/releases>, and uncompress it.
+1. Download the latest version of the source code from <https://github.com/ealbiter/qnotero/releases>, and uncompress it.
 
-  2. Open a terminal and go to the folder where qnotero source code was uncompressed.
+2. Open a terminal and go to the folder where qnotero source code was uncompressed.
 
-  3. Run the following command:
+3. Run the following commands:
 
 ```
-      sudo python setup.py install
+      sudo apt-get install python3-pyqt5 python3-distutils
+      sudo python3 setup.py install
 ```
 
-- In Arch Linux and its derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
-
+In Arch Linux and its derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
 ```
       yay -S qnotero
 ```

@@ -68,7 +68,7 @@ class QnoteroResults(QListWidget):
             if path is None or not okPressed:
                 return
 
-        print("qnoteroResults.mousePressEvent(): prepare to open %s"
+        print("qnoteroResults.DoubleClicked(): prepare to open %s"
               % path)
         try:
             if platform.system() == 'Darwin':  # macOS
@@ -78,9 +78,9 @@ class QnoteroResults(QListWidget):
                 os.startfile(path)
             else:  # linux variants
                 subprocess.call(('xdg-open', path))
-            print("qnoteroResults.mousePressEvent(): file opened")
+            print("qnoteroResults.DoubleClicked(): file opened")
         except Exception as exc:
-            print("qnoteroResults.mousePressEvent(): failed to open file or URL, sorry... %s" % exc)
+            print("qnoteroResults.DoubleClicked(): failed to open file or URL, sorry... %s" % exc)
 
     def keyPressEvent(self, e):
 
