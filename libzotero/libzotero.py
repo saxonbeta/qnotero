@@ -335,8 +335,11 @@ class LibZotero(object):
                                     u"select items.key from items where itemID = %d"
                                     % attachment_id)
                                 key = self.cur.fetchone()[0]
-                                self.index[item_id].fulltext.append(os.path.join(
-                                    self.storage_path, key, item_attachment))
+                                # Only add PDF or HTML files as attachments
+                                if (u".pdf" in item_attachment.lower()) or (u".htm" in item_attachment.lower()) \
+                                        or (u".html" in item_attachment.lower()):
+                                    self.index[item_id].fulltext.append(os.path.join(
+                                        self.storage_path, key, item_attachment))
                         # If the attachment is linked, it is simply the full
                         # path to the attachment
                         else:
