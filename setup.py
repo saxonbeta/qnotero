@@ -98,6 +98,7 @@ elif sys.platform == 'darwin':
         'bdist_mac': {
             'iconfile': 'resources/qnotero.icns',
             'bundle_name': 'Qnotero',
+            'custom_info_plist': 'resources/info.plist'
         }
     }
     executables = [
