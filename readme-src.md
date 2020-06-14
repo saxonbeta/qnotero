@@ -33,7 +33,7 @@ Ubuntu Linux users can install Qnotero through the source code:
 3. Run the following commands:
 
 ```
-      sudo apt-get install python3-pyqt5 python3-distutils
+      sudo apt-get install python3-pyqt5 python3-distutils python3-sip
       sudo python3 setup.py install
 ```
 
