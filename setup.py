@@ -49,17 +49,13 @@ if sys.platform == 'win32':
             'include_files': [
                 'resources',
             ],
-        },
-        'bdist_msi': {
-            'all_users': 'true',
-            'install_icon': 'data\qnotero.ico',
         }
     }
     executables = [
         Executable(
             'qnotero',
             base=base,
-            icon='data\qnotero.ico',
+            icon='resources\qnotero.ico',
         )
     ]
     setup(name="qnotero",
@@ -133,8 +129,7 @@ else:  # Setup options for Linux
     scripts = ["qnotero"]
     data_files = [
         ("/usr/share/qnotero", ["COPYING"]),
-        ("/usr/share/applications", ["data/qnotero.desktop"]),
-        ("/usr/share/qnotero/resources", glob.glob("resources/*.svg")),
+        ("/usr/share/applications", ["resources/qnotero.desktop"]),
         ("/usr/share/qnotero/resources/light",
          glob.glob("resources/light/*")),
         ("/usr/share/qnotero/resources/dark",
