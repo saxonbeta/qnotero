@@ -44,7 +44,7 @@ Unicode True
 
 ; MUI Settings
 !define MUI_ABORTWARNING
-!define MUI_ICON "E:\PycharmProjects\qnotero\data\qnotero.ico"
+!define MUI_ICON "E:\PycharmProjects\qnotero\resources\qnotero.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 
 ; Welcome page
@@ -78,9 +78,8 @@ Section "Qnotero" SEC01
 SectionEnd
 
 Section -AdditionalIcons
-  WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
   CreateDirectory "$SMPROGRAMS\Qnotero"
-  CreateShortCut "$SMPROGRAMS\Qnotero\Qnotero.lnk" "$INSTDIR\qnotero.exe" "" "$INSTDIR\qnotero.ico"
+  CreateShortCut "$SMPROGRAMS\Qnotero\Qnotero.lnk" "$INSTDIR\qnotero.exe" "" "$INSTDIR\qnotero.exe" 0
   CreateShortCut "$SMPROGRAMS\Qnotero\Uninstall.lnk" "$INSTDIR\uninst.exe"
 SectionEnd
 
@@ -105,8 +104,6 @@ FunctionEnd
 
 Section Uninstall
   Delete "$SMPROGRAMS\Qnotero\Qnotero.lnk"
-  Delete "$SMPROGRAMS\Qnotero\Qnotero (runtime).lnk"
-  Delete "$SMPROGRAMS\Qnotero\Website.lnk"
   Delete "$SMPROGRAMS\Qnotero\Uninstall.lnk"
   RMDir "$SMPROGRAMS\Qnotero"
   RMDir /r "$INSTDIR"  
