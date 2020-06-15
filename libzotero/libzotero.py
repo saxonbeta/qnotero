@@ -95,12 +95,22 @@ class LibZotero(object):
 			and itemData.fieldID = fields.fieldID
 			and itemData.valueID = itemDataValues.valueID
 			and (fields.fieldName = "date"
-				or fields.fieldName = "publicationTitle"
-				or fields.fieldName = "volume"
-				or fields.fieldName = "issue"
 				or fields.fieldName = "title"
-				or fields.fieldName = "url"
-				or fields.fieldName = "DOI")
+    				or fields.fieldName = "publicationTitle"
+    				or fields.fieldName = "programTitle"
+    				or fields.fieldName = "websiteTitle"
+    				or fields.fieldName = "proceedingsTitle"
+    				or fields.fieldName = "forumTitle"
+    				or fields.fieldName = "encyclopediaTitle"
+    				or fields.fieldName = "dictionaryTitle"
+    				or fields.fieldName = "bookTitle"
+    				or fields.fieldName = "blogTitle"
+    				or fields.fieldName = "shortTitle"
+    				or fields.fieldName = "seriesTitle"
+    				or fields.fieldName = "url"
+    				or fields.fieldName = "DOI"
+    				or fields.fieldName = "volume"
+    				or fields.fieldName = "issue")
 		"""
 
     abs_info_query = u"""
@@ -112,12 +122,21 @@ class LibZotero(object):
     			and itemData.valueID = itemDataValues.valueID
     			and (fields.fieldName = "date"
     				or fields.fieldName = "publicationTitle"
-    				or fields.fieldName = "volume"
-    				or fields.fieldName = "issue"
-    				or fields.fieldName = "title"
+    				or fields.fieldName = "programTitle"
+    				or fields.fieldName = "websiteTitle"
+    				or fields.fieldName = "proceedingsTitle"
+    				or fields.fieldName = "forumTitle"
+    				or fields.fieldName = "encyclopediaTitle"
+    				or fields.fieldName = "dictionaryTitle"
+    				or fields.fieldName = "bookTitle"
+    				or fields.fieldName = "blogTitle"
+    				or fields.fieldName = "shortTitle"
+    				or fields.fieldName = "seriesTitle"
     				or fields.fieldName = "url"
     				or fields.fieldName = "abstractNote"
-    				or fields.fieldName = "DOI")
+    				or fields.fieldName = "DOI"
+    				or fields.fieldName = "volume"
+    				or fields.fieldName = "issue")
     		"""
 
     author_query = u"""
