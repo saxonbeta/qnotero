@@ -142,42 +142,39 @@ class zoteroItem(object):
         global term_collection, term_author, term_title, term_date, \
             term_publication, term_tag
 
-        # Author is a required field. Without it we don't search
-        if len(self.authors) > 0:
-            # Do all criteria match?
-            match_all = True
-            # Walk through all search terms
-            for term_type, term in terms:
-                match = False
-                if term_type in term_tag:
-                    for tag in self.tags:
-                        if term in tag.lower():
-                            match = True
-                if term_type in term_collection:
-                    for collection in self.collections:
-                        if term in collection.lower():
-                            match = True
-                if not match and term_type in term_author:
-                    for author in self.authors:
-                        if term in author.lower():
-                            match = True
-                if not match and self.date is not None and term_type in term_date:
-                    if term in self.date:
+        # Do all criteria match?
+        match_all = True
+        # Walk through all search terms
+        for term_type, term in terms:
+            match = False
+            if term_type in term_tag:
+                for tag in self.tags:
+                    if term in tag.lower():
                         match = True
-                if not match and self.title is not None and term_type in \
-                        term_title and term in self.title.lower():
+            if term_type in term_collection:
+                for collection in self.collections:
+                    if term in collection.lower():
+                        match = True
+            if not match and term_type in term_author:
+                for author in self.authors:
+                    if term in author.lower():
+                        match = True
+            if not match and self.date is not None and term_type in term_date:
+                if term in self.date:
                     match = True
-                if not match and self.publication is not None and term_type in \
-                        term_publication and term in self.publication.lower():
-                    match = True
-                if not match and self.doi is not None and term_type in \
-                        term_doi and term in self.doi.lower():
-                    match = True
-                if not match:
-                    match_all = False
-                    break
+            if not match and self.title is not None and term_type in \
+                    term_title and term in self.title.lower():
+                match = True
+            if not match and self.publication is not None and term_type in \
+                    term_publication and term in self.publication.lower():
+                match = True
+            if not match and self.doi is not None and term_type in \
+                    term_doi and term in self.doi.lower():
+                match = True
+            if not match:
+                match_all = False
+                break
             return match_all
-        return False
 
     def get_note(self):
 
