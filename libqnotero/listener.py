@@ -20,6 +20,7 @@ import socket
 from libqnotero.config import getConfig
 from threading import Thread
 
+
 class Listener(Thread):
 
 	"""Listens for commands"""
@@ -38,12 +39,12 @@ class Listener(Thread):
 		self.alive = True
 		Thread.__init__(self)
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-		self.sock.bind(("", self.port))			
+		self.sock.bind((u"localhost", self.port))
 		self.sock.settimeout(1.)
 
 	def run(self):
 
-		"""Listenes for activation signals and pops up the Qnotero window"""
+		"""Listen for activation signals and pops up the Qnotero window"""
 		
 		while self.alive:
 			try:

@@ -41,6 +41,7 @@ class SysTray(QSystemTrayIcon):
         self.menu = QMenu()
         self.re_init()
         self.activated.connect(self.activate)
+        self.listenerActivated.connect(self.activate)
 
     def activate(self, reason=None):
 
@@ -51,7 +52,7 @@ class SysTray(QSystemTrayIcon):
         reason -- the reason for activation (default=None)
         """
 
-        if reason == QSystemTrayIcon.Context or platform.system() == 'Darwin':
+        if reason == QSystemTrayIcon.Context or (platform.system() == 'Darwin' and reason is not None):
             return
         if self.qnotero.isVisible():
             self.qnotero.popDown()
