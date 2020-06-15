@@ -40,9 +40,6 @@ if sys.platform == 'win32':
         'build_exe': {
             'optimize': '2',
             'silent': '0',
-            'includes': [
-                'sip'
-            ],
             'packages': [
                 "libqnotero",
                 "libzotero",
@@ -51,9 +48,12 @@ if sys.platform == 'win32':
             ],
             'include_files': [
                 'resources',
-                'data\qnotero.ico',
             ],
         },
+        'bdist_msi': {
+            'all_users': 'true',
+            'install_icon': 'data\qnotero.ico',
+        }
     }
     executables = [
         Executable(
@@ -81,9 +81,6 @@ elif sys.platform == 'darwin':
         'build_exe': {
             'optimize': '2',
             'silent': '0',
-            'includes': [
-                # 'sip'
-            ],
             'packages': [
                 "libqnotero",
                 "libzotero",
