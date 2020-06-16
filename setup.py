@@ -19,10 +19,10 @@
 
 from libqnotero.qnotero import Qnotero
 import sys
-# Use cx_Freeze to make the windows installer and MacOS bundle
+# Use cx_Freeze to make the windows installer and MacOS bundle, setuptools on Linux
 if sys.platform == 'linux':
     import glob
-    from distutils.core import setup
+    from setuptools import setup
 else:
     from cx_Freeze import setup, Executable
 
@@ -35,7 +35,6 @@ options = {}
 executables = []
 if sys.platform == 'win32':
     base = 'Win32GUI'
-    # Setup options for windows
     options = {
         'build_exe': {
             'optimize': '2',

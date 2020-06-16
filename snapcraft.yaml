@@ -13,12 +13,11 @@ parts:
     source: https://github.com/ealbiter/qnotero.git
     stage-packages:
       - python3-pyqt5
-      - python3-sip
     build-packages:
-      - python3-distutils
+      - python3-setuptools
 
 apps:
   qnotero:
-    command: bin/qnotero
+    command: usr/local/bin/qnotero
     plugs:
       - home
