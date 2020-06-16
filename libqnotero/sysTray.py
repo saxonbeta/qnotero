@@ -51,8 +51,9 @@ class SysTray(QSystemTrayIcon):
         Keyword arguments:
         reason -- the reason for activation (default=None)
         """
-
+        print("sysTray.activate(): Activating qnotero reason: %s" % reason)
         if reason == QSystemTrayIcon.Context or (platform.system() == 'Darwin' and reason is not None):
+            print("sysTray.activate(): Exiting wthout activate Qnotero")
             return
         if self.qnotero.isVisible():
             self.qnotero.popDown()
