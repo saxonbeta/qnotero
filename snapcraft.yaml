@@ -20,4 +20,8 @@ apps:
   qnotero:
     command: usr/local/bin/qnotero
     plugs:
+      - network
       - home
+      - desktop
+      - desktop-legacy
+      - wayland
