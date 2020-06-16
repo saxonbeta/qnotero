@@ -24,3 +24,7 @@ apps:
     plugs:
       - network-bind
       - home
+
+layout:
+  /usr/share/qnotero:
+    bind: $SNAP/usr/share/qnotero
