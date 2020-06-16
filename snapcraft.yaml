@@ -27,4 +27,4 @@ apps:
 
 layout:
   /usr/share/qnotero:
-    bind: $SNAP/usr/share/qnotero
+    bind: $SNAP/lib/python3.6/site-packages/usr/share/qnotero
