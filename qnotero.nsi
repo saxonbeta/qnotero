@@ -25,19 +25,18 @@
 ; For each new release, adjust the PRODUCT_VERSION as follows:
 ; 	version-win32-package#
 
-; After compilation, rename the .exe file to (e.g.)
-; 	qnotero_{PRODUCT_VERSION}.exe
 
 ; Build Unicode installer
 Unicode True
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Qnotero"
-!define PRODUCT_VERSION "2.2"
+!define PRODUCT_VERSION "2.2.0"
 !define PRODUCT_PUBLISHER "E. Albiter"
 !define PRODUCT_WEB_SITE "https://github.com/ealbiter/qnotero"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
+!define PRODUCT_BUILD_DIRECTORY "E:\PycharmProjects\qnotero\build\exe.win-amd64-3.8"
 
 ; MUI 1.67 compatible ------
 !include "MUI2.nsh"
@@ -66,7 +65,7 @@ Unicode True
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "build\qnotero-setup_${PRODUCT_VERSION}.exe"
+OutFile "build\setup-qnotero-${PRODUCT_VERSION}.exe"
 InstallDir "$PROGRAMFILES64\Qnotero"
 ShowInstDetails hide
 ShowUnInstDetails hide
@@ -74,7 +73,8 @@ ShowUnInstDetails hide
 Section "Qnotero" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite try
-  File /r "E:\PycharmProjects\qnotero\build\exe.win-amd64-3.8\*.**"
+  File /r "${PRODUCT_BUILD_DIRECTORY}\*.*"
+  File "${PRODUCT_BUILD_DIRECTORY}\lib\PyQt5\VCRUNTIME140.dll"
 SectionEnd
 
 Section -AdditionalIcons

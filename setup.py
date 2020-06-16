@@ -40,6 +40,7 @@ if sys.platform == 'win32':
         'build_exe': {
             'optimize': '2',
             'silent': '0',
+            'include_msvcr': 'True',
             'packages': [
                 "libqnotero",
                 "libzotero",
