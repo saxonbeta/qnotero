@@ -41,9 +41,7 @@ parts:
 
 apps:
   qnotero:
-    desktop: $SNAP/lib/python3.6/site-packages/usr/share/applications/qnotero.desktop
-    extensions:
-      - kde-neon
+    desktop: lib/python3.6/site-packages/usr/share/applications/qnotero.desktop
     command: bin/qnotero
     plugs:
       - network-bind
