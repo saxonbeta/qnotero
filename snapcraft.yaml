@@ -18,10 +18,9 @@ parts:
 
 apps:
   qnotero:
+    extensions:
+      - kde-neon
     command: bin/qnotero
     plugs:
-      - network
+      - network-bind
       - home
-      - desktop
-      - desktop-legacy
-      - wayland
