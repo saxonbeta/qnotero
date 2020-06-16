@@ -5,7 +5,7 @@ description: |
  Qnotero provides lightning quick access to your Zotero references,
   searching through your references by author, year of publication, and DOI
 base: core18
-confinement: devmode
+confinement: strict
 
 parts:
   qnotero:
