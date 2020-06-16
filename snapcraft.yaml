@@ -18,7 +18,7 @@ parts:
 
 apps:
   qnotero:
-    command: usr/local/bin/qnotero
+    command: bin/qnotero
     plugs:
       - network
       - home
