@@ -1,5 +1,7 @@
-Qnotero v2.1.1
+Qnotero v2.2.0
 
+
+&copy; 2020 E. Albiter
 
 ## Overview
 
@@ -7,7 +9,7 @@ Qnotero v2.1.1
 - [What is Qnotero?](#what-is-qnotero)
 - [Download and installation](#download-and-installation)
 	- [Windows](#windows)
-	- [Linux](#linux)
+	- [Ubuntu Linux and its derivatives](#ubuntu-linux-and-its-derivatives)
 	- [mac OS](#mac-os)
 	- [Other operating systems](#other-operating-systems)
 - [Dependencies](#dependencies)
@@ -38,12 +40,11 @@ Ubuntu Linux users can install Qnotero through the source code:
 3. Run the following commands:
 
 ```
-      sudo apt-get install python3-pyqt5 python3-distutils
+      sudo apt-get install python3-pyqt5 python3-distutils python3-sip
       sudo python3 setup.py install
 ```
 
 In Arch Linux and its derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
-
 ```
       yay -S qnotero
 ```
@@ -78,7 +79,7 @@ If you have Gnote installed (a note-taking program for Linux), Qnotero automatic
 [What is Qnotero?]: #what-is-qnotero
 [Download and installation]: #download-and-installation
 [Windows]: #windows
-[Linux]: #linux
+[Ubuntu Linux and its derivatives]: #ubuntu-linux-and-its-derivatives
 [mac OS]: #mac-os
 [Other operating systems]: #other-operating-systems
 [Dependencies]: #dependencies

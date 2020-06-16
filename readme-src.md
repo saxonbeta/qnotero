@@ -1,6 +1,6 @@
 Qnotero v%-- exec: ./qnotero --version --%
 
-&copy; 2019 E. Albiter
+&copy; 2020 E. Albiter
 
 ## Overview
 
