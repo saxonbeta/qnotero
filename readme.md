@@ -8,10 +8,6 @@ Qnotero v2.2.0
 
 - [What is Qnotero?](#what-is-qnotero)
 - [Download and installation](#download-and-installation)
-	- [Windows](#windows)
-	- [Ubuntu Linux and its derivatives](#ubuntu-linux-and-its-derivatives)
-	- [mac OS](#mac-os)
-	- [Other operating systems](#other-operating-systems)
 - [Dependencies](#dependencies)
 - [Gnote integration (Linux only)](#gnote-integration-linux-only)
 
@@ -24,40 +20,7 @@ Freely available under the [GNU GPL 3](http://www.gnu.org/copyleft/gpl.html).
 
 ## Download and installation
 
-### Windows
-
-Windows binaries can be downloaded from GitHub:
-
-- <https://github.com/ealbiter/qnotero/releases>
-
-### Ubuntu Linux and its derivatives
-Ubuntu Linux users can install Qnotero through the source code:
-
-1. Download the latest version of the source code from <https://github.com/ealbiter/qnotero/releases>, and uncompress it.
-
-2. Open a terminal and go to the folder where qnotero source code was uncompressed.
-
-3. Run the following commands:
-
-```
-      sudo apt-get install python3-pyqt5 python3-setuptools
-      sudo python3 setup.py install
-```
-
-In Arch Linux and its derivatives, users can install Qnotero from AUR using yay, or other AUR helper:
-```
-      yay -S qnotero
-```
-
-### mac OS
-
-mac OS users can download the compressed bundle, uncompress it and copy to the application folder.
-
-### Other operating systems
-
-For other operating systems, you can (try to) run Qnotero from source. Source code for stable releases can be downloaded from GitHub:
-
-- <https://github.com/ealbiter/qnotero/releases>
+Visit the [installation page](https://github.com/ealbiter/qnotero/wiki/Installation)
 
 ## Dependencies
 
@@ -75,12 +38,10 @@ If you have Gnote installed (a note-taking program for Linux), Qnotero automatic
 [python]: https://www.python.org/
 [PyQt5]: http://www.riverbankcomputing.co.uk/software/pyqt/download
 
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/qnotero)
+
 [Overview]: #overview
 [What is Qnotero?]: #what-is-qnotero
 [Download and installation]: #download-and-installation
-[Windows]: #windows
-[Ubuntu Linux and its derivatives]: #ubuntu-linux-and-its-derivatives
-[mac OS]: #mac-os
-[Other operating systems]: #other-operating-systems
 [Dependencies]: #dependencies
 [Gnote integration (Linux only)]: #gnote-integration-linux-only
