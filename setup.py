@@ -47,7 +47,8 @@ if sys.platform == 'win32':
                 "libzotero._noteProvider",
             ],
             'include_files': [
-                'resources',
+                'resources\light',
+                'resources\dark',
             ],
         }
     }
@@ -55,15 +56,15 @@ if sys.platform == 'win32':
         Executable(
             'qnotero',
             base=base,
-            icon='resources\qnotero.ico',
+            icon='resources\Windows\qnotero.ico',
         )
     ]
     setup(name="qnotero",
           version=Qnotero.version,
           description="Standalone sidekick to the Zotero reference manager",
           author="E. Albiter",
-          author_email="ealbitere@ipn.mx",
-          url="https://github.com/ealbiter/qnotero",
+          author_email="ealbiter@gmail.com",
+          url="https://ealbiter.github.io/qnotero/",
           scripts=scripts,
           packages=packages,
           package_data=package_data,
@@ -89,24 +90,24 @@ elif sys.platform == 'darwin':
             ],
         },
         'bdist_mac': {
-            'iconfile': 'resources/qnotero.icns',
+            'iconfile': 'resources/macOS/qnotero.icns',
             'bundle_name': 'Qnotero',
-            'custom_info_plist': 'resources/info.plist'
+            'custom_info_plist': 'resources/macOS/info.plist'
         }
     }
     executables = [
         Executable(
             'qnotero',
             base=base,
-            icon='resources/qnotero.icns',
+            icon='resources/macOS/qnotero.icns',
         )
     ]
     setup(name="qnotero",
           version=Qnotero.version,
           description="Standalone sidekick to the Zotero reference manager",
           author="E. Albiter",
-          author_email="ealbitere@ipn.mx",
-          url="https://github.com/ealbiter/qnotero",
+          author_email="ealbiter@gmail.com",
+          url="https://ealbiter.github.io/qnotero/",
           scripts=scripts,
           packages=packages,
           package_data=package_data,
@@ -129,7 +130,7 @@ else:  # Setup options for Linux
     scripts = ["qnotero"]
     data_files = [
         ("/usr/share/qnotero", ["COPYING"]),
-        ("/usr/share/applications", ["resources/qnotero.desktop"]),
+        ("/usr/share/applications", ["resources/Linux/qnotero.desktop"]),
         ("/usr/share/qnotero/resources/light",
          glob.glob("resources/light/*")),
         ("/usr/share/qnotero/resources/dark",
@@ -139,8 +140,8 @@ else:  # Setup options for Linux
           version=Qnotero.version,
           description="Standalone sidekick to the Zotero reference manager",
           author="E. Albiter",
-          author_email="ealbitere@ipn.mx",
-          url="https://github.com/ealbiter/qnotero",
+          author_email="ealbiter@gmail.com",
+          url="https://ealbiter.github.io/qnotero/",
           scripts=scripts,
           packages=packages,
           package_data=package_data,

@@ -37,13 +37,14 @@ Unicode True
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_BUILD_DIRECTORY "E:\PycharmProjects\qnotero\build\exe.win-amd64-3.8"
+!define PRODUCT_RESOURCES_DIRECTORY
 
 ; MUI 1.67 compatible ------
 !include "MUI2.nsh"
 
 ; MUI Settings
 !define MUI_ABORTWARNING
-!define MUI_ICON "E:\PycharmProjects\qnotero\resources\qnotero.ico"
+!define MUI_ICON "${PRODUCT_RESOURCES_DIRECTORY}\Windows\qnotero.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 
 ; Welcome page
