@@ -1,5 +1,0 @@
-export DH_VERBOSE=1
-export PYBUILD_NAME=qnotero
-
-%:
-	dh $@ --with python3 --buildsystem=pybuild
