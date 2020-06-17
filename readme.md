@@ -3,6 +3,8 @@ Qnotero v2.2.0
 
 &copy; 2020 E. Albiter
 
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/qnotero)
+
 ## Overview
 
 
@@ -38,7 +40,7 @@ If you have Gnote installed (a note-taking program for Linux), Qnotero automatic
 [python]: https://www.python.org/
 [PyQt5]: http://www.riverbankcomputing.co.uk/software/pyqt/download
 
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/qnotero)
+
 
 [Overview]: #overview
 [What is Qnotero?]: #what-is-qnotero
