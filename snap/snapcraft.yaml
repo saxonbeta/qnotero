@@ -1,0 +1,49 @@
+name: qnotero
+version: '2.2.0'
+summary: Standalone sidekick to Zotero reference manager.
+description: |
+ Qnotero provides lightning-quick access to your Zotero references,
+  searching through your references by author, year of publication, and DOI.
+base: core18
+confinement: strict
+grade: stable
+
+plugs:
+  zotero-classic-dir:
+    interface: personal-files
+    write:
+      - $HOME/Zotero
+  zotero-snap-dir:
+    interface: personal-files
+    write:
+      - $HOME/snap/zotero-snap/common/Zotero
+
+parts:
+  qnotero:
+    plugin: python
+    source: https://github.com/ealbiter/qnotero.git
+    override-pull: |
+       snapcraftctl pull
+       sed -i.bak -e 's|Icon=/usr/share/qnotero/resources/light/qnotero.png|Icon=lib/python3.6/site-packages/usr/share/qnotero/resources/light/qnotero.png|g' resources/qnotero.desktop
+    stage-packages:
+      - python3-pyqt5
+    build-packages:
+      - python3-setuptools
+
+apps:
+  qnotero:
+    desktop: lib/python3.6/site-packages/usr/share/applications/qnotero.desktop
+    extensions:
+      - kde-neon
+    command: bin/qnotero
+    plugs:
+      - network-bind
+      - zotero-classic-dir
+      - zotero-snap-dir
+      - system-observe
+      - home
+      - unity7
+
+layout:
+  /usr/share/qnotero:
+    symlink: $SNAP/lib/python3.6/site-packages/usr/share/qnotero
