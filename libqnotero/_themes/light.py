@@ -70,7 +70,7 @@ class Light:
 		An extension (.png, .svg, etc.)
 		"""
 
-        return ".svg"
+        return ".png"
 
     def iconWidget(self, iconName):
 
