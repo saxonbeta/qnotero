@@ -100,12 +100,6 @@ class Qnotero(QMainWindow, UiLoader):
 
         self.ui.labelNoteAvailable.hide()
 
-    def leaveEvent(self, e):
-
-        """Hide the Window when the mouse is lost"""
-
-        self.popDown()
-
     def openNote(self):
 
         """Open the active note"""
