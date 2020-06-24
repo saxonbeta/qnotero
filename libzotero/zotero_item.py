@@ -283,6 +283,13 @@ class zoteroItem(object):
             self.gnotero_format_str = s.replace(u"&", u"&amp;")
         return self.gnotero_format_str
 
+    def author_date_format(self):
+        """
+
+        :return: String containing the author(s) and publication date
+        """
+        return self.format_author() + u" " + self.format_date()
+
     def full_format(self):
 
         """
@@ -291,7 +298,7 @@ class zoteroItem(object):
         """
 
         if self.gnotero_format_str is None:
-            s =  self.format_author() + u" " + self.format_date()
+            s = self.author_date_format()
             if self.title is not None:
                 s += u"\n" + self.title
             if self.publication is not None:

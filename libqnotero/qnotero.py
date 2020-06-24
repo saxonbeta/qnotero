@@ -328,8 +328,7 @@ class Qnotero(QMainWindow, UiLoader):
         if (e.type() == QtCore.QEvent.ContextMenu and source is
                 self.ui.listWidgetResults):
             contextMenu = QMenu(self)
-            # TODO: Add action to show notes in a dialog window
-            actCopyNotes = contextMenu.addAction(u"Copy notes")
+            actCopyAuthordate = contextMenu.addAction(u"Copy author(s) and year")
             actCopyDOI = contextMenu.addAction(u"Copy DOI")
             actCopyTitle = contextMenu.addAction(u"Copy title")
             actCopyAbs = contextMenu.addAction(u"Copy abstract")
@@ -338,11 +337,10 @@ class Qnotero(QMainWindow, UiLoader):
             item = source.itemAt(e.pos())
             if (action is None) or (item is None):
                 return True
-            print(u"qnotero.contextMenuEvent(): %s selected" % action.text())
             clipboard = QtGui.QApplication.clipboard()
             clipboard.clear(mode=clipboard.Clipboard)
-            if action is actCopyNotes:
-                clipboard.setText(item.zoteroItem.get_note(), mode=clipboard.Clipboard)
+            if action is actCopyAuthordate:
+                clipboard.setText(item.zoteroItem.author_date_format(), mode=clipboard.Clipboard)
                 return True
             elif action is actCopyDOI:
                 if item.zoteroItem.doi is not None:
