@@ -21,6 +21,7 @@
 term_collection = None, u"collection"
 term_tag = None, u"tag"
 term_author = None, u"author"
+term_editor = None, u"editor"
 term_date = None, u"date", u"year"
 term_publication = None, u"publication", u"journal"
 term_title = None, u"title"
@@ -68,6 +69,10 @@ class zoteroItem(object):
                 self.authors = item[u"author"]
             else:
                 self.authors = []
+            if u"editor" in item:
+                self.editors = item[u"editor"]
+            else:
+                self.editors = None
             if u"date" in item:
                 self.date = item[u"date"]
             else:
@@ -113,6 +118,7 @@ class zoteroItem(object):
             self.collections = []
             self.publication = None
             self.authors = []
+            self.editors = []
             self.tags = []
             self.issue = None
             self.volume = None
@@ -158,6 +164,10 @@ class zoteroItem(object):
             if not match and term_type in term_author:
                 for author in self.authors:
                     if term in author.lower():
+                        match = True
+            if not match and term_type in term_editor:
+                for editor in self.editors:
+                    if term in editor.lower():
                         match = True
             if not match and self.date is not None and term_type in term_date:
                 if term in self.date:

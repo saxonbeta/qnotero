@@ -146,8 +146,20 @@ class LibZotero(object):
 			items.itemID = itemCreators.itemID
 			and itemCreators.creatorID = creators.creatorID
 			and itemCreators.creatorTypeID = creatorTypes.creatorTypeID
+			and creatorTypes.creatorType = "author"
 		order by itemCreators.orderIndex
 		"""
+
+    editor_query = u"""
+    		select items.itemID, creators.lastName
+    		from items, itemCreators, creators, creatorTypes
+    		where
+    			items.itemID = itemCreators.itemID
+    			and itemCreators.creatorID = creators.creatorID
+    			and itemCreators.creatorTypeID = creatorTypes.creatorTypeID
+    			and creatorTypes.creatorType = "editor"
+    		order by itemCreators.orderIndex
+    		"""
 
     collection_query = u"""
 		select items.itemID, collections.collectionName
@@ -303,7 +315,7 @@ class LibZotero(object):
                         self.index[item_id].url = item_value
                     elif item_name == u'abstractNote':
                         self.index[item_id].abstract = item_value
-            # Retrieve author or editor information
+            # Retrieve author information
             self.cur.execute(self.author_query)
             for item in self.cur.fetchall():
                 item_id = item[0]
@@ -312,6 +324,15 @@ class LibZotero(object):
                     if item_id not in self.index:
                         self.index[item_id] = zotero_item(item_id)
                     self.index[item_id].authors.append(item_author)
+            # Retrieve editor information
+            self.cur.execute(self.editor_query)
+            for item in self.cur.fetchall():
+                item_id = item[0]
+                if item_id not in deleted:
+                    item_editor = item[1].title()
+                    if item_id not in self.index:
+                        self.index[item_id] = zotero_item(item_id)
+                    self.index[item_id].editors.append(item_editor)
             # Retrieve collection information
             self.cur.execute(self.collection_query)
             for item in self.cur.fetchall():
