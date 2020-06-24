@@ -96,21 +96,21 @@ class LibZotero(object):
 			and itemData.valueID = itemDataValues.valueID
 			and (fields.fieldName = "date"
 				or fields.fieldName = "title"
-    				or fields.fieldName = "publicationTitle"
-    				or fields.fieldName = "programTitle"
-    				or fields.fieldName = "websiteTitle"
-    				or fields.fieldName = "proceedingsTitle"
-    				or fields.fieldName = "forumTitle"
-    				or fields.fieldName = "encyclopediaTitle"
-    				or fields.fieldName = "dictionaryTitle"
-    				or fields.fieldName = "bookTitle"
-    				or fields.fieldName = "blogTitle"
-    				or fields.fieldName = "shortTitle"
-    				or fields.fieldName = "seriesTitle"
-    				or fields.fieldName = "url"
-    				or fields.fieldName = "DOI"
-    				or fields.fieldName = "volume"
-    				or fields.fieldName = "issue")
+    			or fields.fieldName = "publicationTitle"
+    			or fields.fieldName = "programTitle"
+    			or fields.fieldName = "websiteTitle"
+    			or fields.fieldName = "proceedingsTitle"
+    			or fields.fieldName = "forumTitle"
+    			or fields.fieldName = "encyclopediaTitle"
+    			or fields.fieldName = "dictionaryTitle"
+    			or fields.fieldName = "bookTitle"
+    			or fields.fieldName = "blogTitle"
+    			or fields.fieldName = "seriesTitle"
+    			or fields.fieldName = "subject"
+    			or fields.fieldName = "url"
+    			or fields.fieldName = "DOI"
+    			or fields.fieldName = "volume"
+    			or fields.fieldName = "issue")
 		"""
 
     abs_info_query = u"""
@@ -121,6 +121,7 @@ class LibZotero(object):
     			and itemData.fieldID = fields.fieldID
     			and itemData.valueID = itemDataValues.valueID
     			and (fields.fieldName = "date"
+    			    or fields.fieldName = "title"
     				or fields.fieldName = "publicationTitle"
     				or fields.fieldName = "programTitle"
     				or fields.fieldName = "websiteTitle"
@@ -130,8 +131,7 @@ class LibZotero(object):
     				or fields.fieldName = "dictionaryTitle"
     				or fields.fieldName = "bookTitle"
     				or fields.fieldName = "blogTitle"
-    				or fields.fieldName = "shortTitle"
-    				or fields.fieldName = "seriesTitle"
+    				or fields.fieldName = "subject"
     				or fields.fieldName = "url"
     				or fields.fieldName = "abstractNote"
     				or fields.fieldName = "DOI"
@@ -299,7 +299,11 @@ class LibZotero(object):
                         self.index[item_id] = zotero_item(item_id,
                                                           noteProvider=self.noteProvider)
                         self.index[item_id].key = key
-                    if item_name == u"publicationTitle":
+                    # Not all items have the publicationTitle field
+                    if item_name == u"publicationTitle" or item_name == u"bookTitle"\
+                            or item_name == u"blogTitle" or item_name == u"encyclopediaTitle"\
+                            or item_name == u"proceedingsTitle" or item_name == u"programTitle"\
+                            or item_name == u"dictionaryTitle":
                         self.index[item_id].publication = str(item_value)
                     elif item_name == u"date":
                         self.index[item_id].date = item_value
@@ -309,7 +313,8 @@ class LibZotero(object):
                         self.index[item_id].issue = item_value
                     elif item_name == u"DOI":
                         self.index[item_id].doi = item_value
-                    elif item_name == u"title":
+                        # subject corresponds to the email title
+                    elif item_name == u"title" or item_name == u"subject":
                         self.index[item_id].title = str(item_value)
                     elif item_name == u'url':
                         self.index[item_id].url = item_value
