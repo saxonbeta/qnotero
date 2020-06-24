@@ -20,9 +20,9 @@
 
 import sys
 import os
-import subprocess
-from libqnotero.qt.QtGui import QMainWindow, QDesktopWidget, QMessageBox, QStyleFactory
-from libqnotero.qt.QtCore import QSettings, QCoreApplication
+from libqnotero.qt import QtGui, QtCore
+from libqnotero.qt.QtGui import QMainWindow, QDesktopWidget, QMessageBox, QMenu
+from libqnotero.qt.QtCore import QSettings, QCoreApplication, QObject, QEvent
 from libqnotero.sysTray import SysTray
 from libqnotero.config import saveConfig, restoreConfig, getConfig
 from libqnotero.qnoteroItemDelegate import QnoteroItemDelegate
@@ -211,6 +211,7 @@ class Qnotero(QMainWindow, UiLoader):
         self.ui.listWidgetResults.clear()
         self.ui.textAbstract.setText(u'')
         self.ui.lineEditQuery.clear()
+        self.ui.listWidgetResults.installEventFilter(self)
         if getConfig(u'noteProvider') == u'gnote':
             from libzotero._noteProvider.gnoteProvider import GnoteProvider
             print(u"qnotero.reInit(): using GnoteProvider")
@@ -328,6 +329,44 @@ class Qnotero(QMainWindow, UiLoader):
 		"""
 
         self.ui.labelResultMsg.setText(u"<small><i>%s</i></small>" % msg)
+
+    def eventFilter(self, source: 'QObject', e: 'QEvent') -> bool:
+        if (e.type() == QtCore.QEvent.ContextMenu and source is
+                self.ui.listWidgetResults):
+            contextMenu = QMenu(self)
+            # TODO: Add action to show notes in a dialog window
+            actCopyNotes = contextMenu.addAction(u"Copy notes")
+            actCopyDOI = contextMenu.addAction(u"Copy DOI")
+            actCopyTitle = contextMenu.addAction(u"Copy title")
+            actCopyAbs = contextMenu.addAction(u"Copy abstract")
+            actCopyRef = contextMenu.addAction(u"Copy Reference")
+            action = contextMenu.exec_(self.mapToGlobal(e.pos()))
+            item = source.itemAt(e.pos())
+            if (action is None) or (item is None):
+                return True
+            print(u"qnotero.contextMenuEvent(): %s selected" % action.text())
+            clipboard = QtGui.QApplication.clipboard()
+            clipboard.clear(mode=clipboard.Clipboard)
+            if action is actCopyNotes:
+                clipboard.setText(item.zoteroItem.get_note(), mode=clipboard.Clipboard)
+                return True
+            elif action is actCopyDOI:
+                if item.zoteroItem.doi is not None:
+                    clipboard.setText(item.zoteroItem.doi, mode=clipboard.Clipboard)
+                return True
+            elif action is actCopyTitle:
+                title = item.zoteroItem.format_title()
+                if title is not None:
+                    clipboard.setText(title, mode=clipboard.Clipboard)
+                return True
+            elif action is actCopyAbs:
+                if item.zoteroItem.abstract is not None:
+                    clipboard.setText(item.zoteroItem.abstract, mode=clipboard.Clipboard)
+                return True
+            elif action is actCopyRef:
+                clipboard.setText(item.zoteroItem.full_format(), mode=clipboard.Clipboard)
+                return True
+        return QMainWindow.eventFilter(self, source, e)
 
     def updateCheck(self):
 
