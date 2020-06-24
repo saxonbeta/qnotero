@@ -148,8 +148,6 @@ class zoteroItem(object):
         global term_collection, term_author, term_title, term_date, \
             term_publication, term_tag
 
-        # Do all criteria match?
-        match_all = True
         # Walk through all search terms
         for term_type, term in terms:
             match = False
@@ -181,10 +179,12 @@ class zoteroItem(object):
             if not match and self.doi is not None and term_type in \
                     term_doi and term in self.doi.lower():
                 match = True
+            # Do at least one criteria match?
+            # If not return false, otherwise continue
             if not match:
-                match_all = False
-                break
-            return match_all
+                return False
+        # If we reach this code, all the criteria matched
+        return True
 
     def get_note(self):
 
