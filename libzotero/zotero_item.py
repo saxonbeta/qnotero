@@ -53,6 +53,7 @@ class zoteroItem(object):
         self.noteProvider = noteProvider
         self.note = -1
         if isinstance(init, dict):
+            # TODO: Add the information like bookTitle, programTitle, etc.
             if u"item_id" in item:
                 self.id = item[u"item_id"]
             else:
@@ -197,8 +198,12 @@ class zoteroItem(object):
 
         if self.note != -1:
             return self.note
-        self.note = self.noteProvider.search(self)
-        return self.note
+        # Return None if noteProvider is not defined
+        if self.noteProvider is not None:
+            self.note = self.noteProvider.search(self)
+            return self.note
+        else:
+            return None
 
     def format_author(self):
 
