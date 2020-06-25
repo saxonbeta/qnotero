@@ -41,6 +41,10 @@ def parse_query(query):
     A list of tuples.
     """
 
+    # TODO: Improve this code. There are several situations where it is not working correctly
+    # For example: Author: (without any other word) retrieves all the items
+    # Also, if the query string contains a semicolon but no a valid term (ex. Mathot:),
+    # the search retrieves no entries
     # Make sure that spaces are handled correctly after
     # semicolons. E.g., Author: Mathot
     while u": " in query:
@@ -181,10 +185,9 @@ class LibZotero(object):
 
     deleted_query = u"select itemID from deletedItems"
 
-    retracted_query = u"select retractedItems.itemID from retractedItems"
+    retracted_query = u"select itemID from retractedItems"
 
-    attachmentid_query = u"""select itemTypes.itemTypeID, itemTypes.typeName
-                             from itemTypes
+    attachmentid_query = u"""select itemTypes.itemTypeID from itemTypes 
                              where itemTypes.typeName = "attachment"
                              """
 
