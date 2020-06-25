@@ -88,7 +88,7 @@ class LibZotero(object):
 		"""
 
     info_query = u"""
-		select items.itemID, fields.fieldName, itemDataValues.value, items.key
+		select items.itemID, items.itemTypeID, fields.fieldName, itemDataValues.value, items.key
 		from items, itemData, fields, itemDataValues
 		where
 			items.itemID = itemData.itemID
@@ -114,7 +114,7 @@ class LibZotero(object):
 		"""
 
     abs_info_query = u"""
-    		select items.itemID, fields.fieldName, itemDataValues.value, items.key
+    		select items.itemID, items.itemTypeID, fields.fieldName, itemDataValues.value, items.key
     		from items, itemData, fields, itemDataValues
     		where
     			items.itemID = itemData.itemID
@@ -180,6 +180,11 @@ class LibZotero(object):
 		"""
 
     deleted_query = u"select itemID from deletedItems"
+
+    attachmentid_query = u"""select itemTypes.itemTypeID, itemTypes.typeName
+                             from itemTypes
+                             where itemTypes.typeName = "attachment"
+                             """
 
     def __init__(self, zotero_path, noteProvider=None):
 
@@ -272,6 +277,11 @@ class LibZotero(object):
             self.cur.execute(self.deleted_query)
             for item in self.cur.fetchall():
                 deleted.append(item[0])
+            # Retrieve the attachment ID
+            query = self.attachmentid_query
+            self.cur.execute(query)
+            item = self.cur.fetchone()
+            attachmentid = item[0]
             # Retrieve information about date, publication, volume, issue, DOI,
             # title, and abstract if the option is selected
             if getConfig(u'showAbstract'):
@@ -280,21 +290,24 @@ class LibZotero(object):
                 query = self.info_query
             self.cur.execute(query)
             for item in self.cur.fetchall():
+                # If the item is marked as attachment just continue to the next one
+                if item[1] == attachmentid:
+                    continue
                 item_id = item[0]
-                key = item[3]
+                key = item[4]
                 if item_id not in deleted:
-                    item_name = item[1]
-                    # Parse date fields, because we only want a year or a #
+                    item_name = item[2]
+                    # Parse date fields, because we only want a year or a
                     # 'special' date
                     if item_name == u"date":
                         item_value = None
                         for sd in self.special_dates:
-                            if sd in item[2].lower():
+                            if sd in item[3].lower():
                                 item_value = sd
                                 break
-                        item_value = item[2][0:4]
+                        item_value = item[3][0:4]
                     else:
-                        item_value = item[2]
+                        item_value = item[3]
                     if item_id not in self.index:
                         self.index[item_id] = zotero_item(item_id,
                                                           noteProvider=self.noteProvider)
@@ -353,10 +366,9 @@ class LibZotero(object):
             self.cur.execute(self.tag_query)
             for item in self.cur.fetchall():
                 item_id = item[0]
-                if item_id not in deleted:
+                # Only add tags for existing entries in the index
+                if item_id in self.index:
                     item_tag = item[1]
-                    if item_id not in self.index:
-                        self.index[item_id] = zotero_item(item_id)
                     self.index[item_id].tags.append(item_tag)
                     if item_tag not in self.tag_index:
                         self.tag_index.append(item_tag)
@@ -389,6 +401,7 @@ class LibZotero(object):
             self.cur.close()
             print(u"libzotero.update(): indexing completed in %.3fs"
                   % (time.time() - t))
+            print(u"%s entries processed" % len(self.index))
         return True
 
     def search(self, query):
