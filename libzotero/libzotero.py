@@ -181,6 +181,8 @@ class LibZotero(object):
 
     deleted_query = u"select itemID from deletedItems"
 
+    retracted_query = u"select retractedItems.itemID from retractedItems"
+
     attachmentid_query = u"""select itemTypes.itemTypeID, itemTypes.typeName
                              from itemTypes
                              where itemTypes.typeName = "attachment"
@@ -272,30 +274,32 @@ class LibZotero(object):
             self.conn = sqlite3.connect(self.gnotero_database)
             self.cur = self.conn.cursor()
             # First create a list of deleted items, so we can ignore those later
-            # TODO: Also get retracted items to ignore them too
             deleted = []
             self.cur.execute(self.deleted_query)
             for item in self.cur.fetchall():
                 deleted.append(item[0])
+            # Then create a list of retracted item to ignore them too
+            retracted = []
+            self.cur.execute(self.retracted_query)
+            for item in self.cur.fetchall():
+                retracted.append(item[0])
             # Retrieve the attachment ID
-            query = self.attachmentid_query
-            self.cur.execute(query)
+            self.cur.execute(self.attachmentid_query)
             item = self.cur.fetchone()
             attachmentid = item[0]
             # Retrieve information about date, publication, volume, issue, DOI,
             # title, and abstract if the option is selected
             if getConfig(u'showAbstract'):
-                query = self.abs_info_query
+                self.cur.execute(self.abs_info_query)
             else:
-                query = self.info_query
-            self.cur.execute(query)
+                self.cur.execute(self.info_query)
             for item in self.cur.fetchall():
                 # If the item is marked as attachment just continue to the next one
                 if item[1] == attachmentid:
                     continue
                 item_id = item[0]
                 key = item[4]
-                if item_id not in deleted:
+                if item_id not in deleted and item_id not in retracted:
                     item_name = item[2]
                     # Parse date fields, because we only want a year or a
                     # 'special' date
@@ -337,7 +341,7 @@ class LibZotero(object):
             self.cur.execute(self.author_query)
             for item in self.cur.fetchall():
                 item_id = item[0]
-                if item_id not in deleted:
+                if item_id not in deleted and item_id not in retracted:
                     item_author = item[1].title()
                     if item_id not in self.index:
                         self.index[item_id] = zotero_item(item_id)
@@ -346,7 +350,7 @@ class LibZotero(object):
             self.cur.execute(self.editor_query)
             for item in self.cur.fetchall():
                 item_id = item[0]
-                if item_id not in deleted:
+                if item_id not in deleted and item_id not in retracted:
                     item_editor = item[1].title()
                     if item_id not in self.index:
                         self.index[item_id] = zotero_item(item_id)
@@ -355,7 +359,7 @@ class LibZotero(object):
             self.cur.execute(self.collection_query)
             for item in self.cur.fetchall():
                 item_id = item[0]
-                if item_id not in deleted:
+                if item_id not in deleted and item_id not in retracted:
                     item_collection = item[1]
                     if item_id not in self.index:
                         self.index[item_id] = zotero_item(item_id)
@@ -376,7 +380,7 @@ class LibZotero(object):
             self.cur.execute(self.attachment_query)
             for item in self.cur.fetchall():
                 item_id = item[0]
-                if item_id not in deleted:
+                if item_id not in deleted and item_id not in retracted:
                     if item[1] is not None:
                         att = item[1]
                         # If the attachment is stored in the Zotero folder, it is preceded
