@@ -35,13 +35,13 @@ class zoteroItem(object):
 
     """Represents a single zotero item."""
 
-    def __init__(self, init=None, noteProvider=None):
+    def __init__(self, item=None, noteProvider=None):
 
         """
         Constructor.
 
         Keyword arguments:
-        init			--	A `dict` with item information, or an `int` with the
+        item			--	A `dict` with item information, or an `int` with the
                             item id	. (default=None)
         noteProvider	--	A noteProvider object. (default=None)
         """
@@ -52,8 +52,9 @@ class zoteroItem(object):
         self.collection_color = u"#000000"
         self.noteProvider = noteProvider
         self.note = -1
-        if isinstance(init, dict):
-            # TODO: Add the information like bookTitle, programTitle, etc.
+        if isinstance(item, dict):
+            # TODO: Add the information like bookTitle, programTitle, etc. It seems that this code is not used
+            # anywhere
             if u"item_id" in item:
                 self.id = item[u"item_id"]
             else:
@@ -129,8 +130,8 @@ class zoteroItem(object):
             self.doi = None
             self.abstract = None
             self.url = None
-            if isinstance(init, int):
-                self.id = init
+            if isinstance(item, int):
+                self.id = item
             else:
                 self.id = None
 
