@@ -25,8 +25,8 @@ term_editor = None, u"editor"
 term_date = None, u"date", u"year"
 term_publication = None, u"publication", u"journal"
 term_title = None, u"title"
-term_doi = None, u"DOI"
-term_abstract = None, u'abstractNote'
+term_doi = None, u"doi"
+term_abstract = None, u'abs'
 
 cache = {}
 

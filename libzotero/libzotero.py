@@ -27,6 +27,10 @@ import time
 from libqnotero.config import getConfig
 from libzotero.zotero_item import zoteroItem as zotero_item
 
+term_index = {u"collection", u"tag", u"author", u"editor",
+              u"date", u"year", u"publication", u"journal",
+              u"title", u"doi", u'abs'}
+
 
 def parse_query(query):
 
@@ -41,25 +45,22 @@ def parse_query(query):
     A list of tuples.
     """
 
-    # TODO: Improve this code. There are several situations where it is not working correctly
-    # For example: Author: (without any other word) retrieves all the items
-    # Also, if the query string contains a semicolon but no a valid term (ex. Mathot:),
-    # the search retrieves no entries
-    # Make sure that spaces are handled correctly after
-    # semicolons. E.g., Author: Mathot
-    while u": " in query:
-        query = query.replace(u": ", u":")
+    # To search in a specific field now the syntax is  author:doe
+    # without a space. If a space is included (author: doe), "author:"
+    # is treated as simple query, colon included
+
     # Parse the terms into a suitable format
-    terms = []
-    # Check if the criterium is type-specified, like "author: doe"
-    # import shlex
-    for term in query.strip().lower().split():
-        s = term.split(u":")
-        if len(s) == 2:
-            terms.append((s[0].strip(), s[1].strip()))
+    items = []
+    for item in query.strip().lower().split():
+        s = item.split(u":")
+        # Check if the criterium is type-specified
+        if len(s) == 2 and s[0].lower() in term_index and s[1] != "":
+            # A query like "author:doe"
+            items.append((s[0], s[1]))
         else:
-            terms.append((None, term.strip()))
-    return terms
+            # A query with a colon or a simple query
+            items.append((None, item.strip()))
+    return items
 
 
 def valid_location(path):
