@@ -93,32 +93,6 @@ class LibZotero(object):
 		"""
 
     info_query = u"""
-		select items.itemID, items.itemTypeID, fields.fieldName, itemDataValues.value, items.key
-		from items, itemData, fields, itemDataValues
-		where
-			items.itemID = itemData.itemID
-			and itemData.fieldID = fields.fieldID
-			and itemData.valueID = itemDataValues.valueID
-			and (fields.fieldName = "date"
-				or fields.fieldName = "title"
-    			or fields.fieldName = "publicationTitle"
-    			or fields.fieldName = "programTitle"
-    			or fields.fieldName = "websiteTitle"
-    			or fields.fieldName = "proceedingsTitle"
-    			or fields.fieldName = "forumTitle"
-    			or fields.fieldName = "encyclopediaTitle"
-    			or fields.fieldName = "dictionaryTitle"
-    			or fields.fieldName = "bookTitle"
-    			or fields.fieldName = "blogTitle"
-    			or fields.fieldName = "seriesTitle"
-    			or fields.fieldName = "subject"
-    			or fields.fieldName = "url"
-    			or fields.fieldName = "DOI"
-    			or fields.fieldName = "volume"
-    			or fields.fieldName = "issue")
-		"""
-
-    abs_info_query = u"""
     		select items.itemID, items.itemTypeID, fields.fieldName, itemDataValues.value, items.key
     		from items, itemData, fields, itemDataValues
     		where
@@ -292,11 +266,8 @@ class LibZotero(object):
             item = self.cur.fetchone()
             attachmentid = item[0]
             # Retrieve information about date, publication, volume, issue, DOI,
-            # title, and abstract if the option is selected
-            if getConfig(u'showAbstract'):
-                self.cur.execute(self.abs_info_query)
-            else:
-                self.cur.execute(self.info_query)
+            # title, and abstract.
+            self.cur.execute(self.info_query)
             for item in self.cur.fetchall():
                 # If the item is marked as attachment just continue to the next one
                 if item[1] == attachmentid:

@@ -153,6 +153,7 @@ class zoteroItem(object):
         # Walk through all search terms
         for term_type, term in terms:
             match = False
+            # Do at least one criteria match?
             if term_type in term_tag:
                 for tag in self.tags:
                     if term in tag.lower():
@@ -181,7 +182,9 @@ class zoteroItem(object):
             if not match and self.doi is not None and term_type in \
                     term_doi and term in self.doi.lower():
                 match = True
-            # Do at least one criteria match?
+            if not match and self.abstract is not None and term_type in \
+                    term_abstract and term in self.abstract.lower():
+                match = True
             # If not return false, otherwise continue
             if not match:
                 return False
