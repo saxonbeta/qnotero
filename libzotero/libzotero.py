@@ -46,20 +46,25 @@ def parse_query(query):
     """
 
     # To search in a specific field now the syntax is  author:doe
-    # without a space. If a space is included (author: doe), "author:"
-    # is treated as simple query, colon included
+    # or author: doe
 
+    # Make sure that spaces are handled correctly after
+    # colon. E.g., author: doe
+    while u": " in query:
+        query = query.replace(u": ", u":")
     # Parse the terms into a suitable format
     items = []
     for item in query.strip().lower().split():
         s = item.split(u":")
         # Check if the criterium is type-specified
         if len(s) == 2 and s[0].lower() in term_index and s[1] != "":
-            # A query like "author:doe"
+            # A query like "author:doe" or "author: doe
             items.append((s[0], s[1]))
         else:
-            # A query with a colon or a simple query
-            items.append((None, item.strip()))
+            # A query with a colon or a simple query.
+            for subitem in s:
+                if subitem != u"":
+                    items.append((None, subitem.strip()))
     return items
 
 
