@@ -47,6 +47,7 @@ class zoteroItem(object):
         """
 
         self.gnotero_format_str = None
+        self.html_format_str = None
         self.simple_format_str = None
         self.filename_format_str = None
         self.collection_color = u"#000000"
@@ -322,6 +323,30 @@ class zoteroItem(object):
                 s += u"\n" + self.format_tags()
             self.gnotero_format_str = s
         return self.gnotero_format_str
+
+    def full_formatHTML(self):
+
+        """
+        Returns:
+        A pretty, extensive representation of the current item in HTML format
+        """
+        if self.html_format_str is None:
+            s = u"<b>"
+            s += self.author_date_format() + u"</b>"
+            if self.title is not None:
+                s += u"<br/>" + self.title
+            if self.publication is not None:
+                s += u"<br/><i>" + self.publication + u"</i>"
+                if self.volume is not None:
+                    s += u", %s" % self.volume
+                    if self.issue is not None:
+                        s += u"(%s)" % self.issue
+            else:
+                s += u"<br/>"
+            if self.tags is not None:
+                s += u"<br/><b><small>" + self.format_tags() + u"</small></b>"
+            self.html_format_str = s
+        return self.html_format_str
 
     def simple_format(self):
 
