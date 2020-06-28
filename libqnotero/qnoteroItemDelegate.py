@@ -18,8 +18,8 @@
 
 #
 
-from libqnotero.qt.QtGui import QStyledItemDelegate, QStyle
-from libqnotero.qt.QtGui import QFont, QFontMetrics
+from libqnotero.qt.QtGui import QStyledItemDelegate, QStyle, QTextDocument
+from libqnotero.qt.QtGui import QFont, QFontMetrics, QAbstractTextDocumentLayout
 from libqnotero.qt.QtCore import Qt, QRect, QSize
 from libzotero.zotero_item import cache as zoteroCache
 
@@ -91,7 +91,7 @@ class QnoteroItemDelegate(QStyledItemDelegate):
 		record = model.data(index)
 		text = record
 		zoteroItem = zoteroCache[text]
-		l = zoteroItem.full_format().split(u"\n")
+
 		if zoteroItem.fulltext is None:
 			pixmap = self.noPdfPixmap
 		else:
@@ -116,7 +116,7 @@ class QnoteroItemDelegate(QStyledItemDelegate):
 			foreground = self.palette.WindowText
 
 		# Draw the frame
-		_rect = option.rect.adjusted(self._margin, self._margin, \
+		_rect = option.rect.adjusted(self._margin, self._margin,
 			-2*self._margin, -self._margin)
 		pen = painter.pen()
 		pen.setColor(self.palette.color(background))
@@ -137,17 +137,15 @@ class QnoteroItemDelegate(QStyledItemDelegate):
 		painter.drawPixmap(_rect, pixmap)
 
 		# Draw the text
-		_rect = option.rect.adjusted(self.pixmapSize+self.dy, 0.5*self.dy, \
-			-self.dy, 0)
-
-		f = [self.tagFont, self.italicFont, self.regularFont, \
-			self.boldFont]
-		l.reverse()
-		while len(l) > 0:
-			s = l.pop()
-			if len(f) > 0:
-				painter.setFont(f.pop())
-			painter.drawText(_rect, Qt.AlignLeft, s)
-			_rect = _rect.adjusted(0, self.dy, 0, 0)
-
+		painter.save()
+		_rect = option.rect.adjusted(self.pixmapSize+0.5*self.dy, 0.5*self.dy,
+									 -self.dy, 0)
+		itemText = zoteroItem.full_formatHTML()
+		textRenderer = QTextDocument()
+		context = QAbstractTextDocumentLayout.PaintContext()
+		textRenderer.setHtml(itemText)
+		painter.translate(_rect.topLeft())
+		textRenderer.documentLayout().draw(painter, context)
+		_rect = _rect.adjusted(0, self.dy, 0, 0)
+		painter.restore()
 
