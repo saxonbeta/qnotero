@@ -144,7 +144,8 @@ class Light:
                                          "resources", self.themeFolder())
         self._iconExt = self.iconExt()
         if not os.path.exists(self._themeFolder):
-            if platform.system() == 'Darwin' and hasattr(sys, 'frozen'):
+            if (platform.system() == 'Darwin' or platform.system() == 'Windows')\
+                    and hasattr(sys, 'frozen'):
                 self._themeFolder = os.path.join(os.path.dirname(sys.executable),
                                                  self.themeFolder())
             else:
