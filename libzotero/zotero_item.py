@@ -150,7 +150,9 @@ class zoteroItem(object):
 
         global term_collection, term_author, term_title, term_date, \
             term_publication, term_tag
-
+        # Nothing to search
+        if len(terms) == 0:
+            return False
         # Walk through all search terms
         for term_type, term in terms:
             match = False
