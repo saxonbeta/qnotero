@@ -57,9 +57,14 @@ def parse_query(query):
     for item in query.strip().lower().split():
         s = item.split(u":")
         # Check if the criterium is type-specified
-        if len(s) == 2 and s[0].lower() in term_index and s[1] != "":
-            # A query like "author:doe" or "author: doe
-            items.append((s[0], s[1]))
+        if len(s) == 2 and s[0].lower() in term_index:
+            # Check if the query is not empty
+            if s[1] != "":
+                # A query like "author:doe" or "author: doe
+                items.append((s[0], s[1]))
+            else:
+                # An empty field search ("author: "), just ignore it
+                continue
         else:
             # A query with a colon or a simple query.
             for subitem in s:
@@ -403,12 +408,13 @@ class LibZotero(object):
         if not self.update():
             return []
         if query in self.search_cache:
-            print(
-                u"libzotero.search(): retrieving results for '%s' from cache"
-                % query)
+            print(u"libzotero.search(): retrieving results for '%s' from cache"
+                  % query)
             return self.search_cache[query]
         t = time.time()
         terms = parse_query(query)
+        if len(terms) == 0:
+            return []
         results = []
         for item_id, item in self.index.items():
             if item.match(terms):
