@@ -140,6 +140,9 @@ class QnoteroItemDelegate(QStyledItemDelegate):
 		painter.save()
 		_rect = option.rect.adjusted(self.pixmapSize+0.5*self.dy, 0.5*self.dy,
 									 -self.dy, 0)
+
+		f = [self.tagFont, self.italicFont, self.regularFont,
+			 self.boldFont]
 		itemText = zoteroItem.full_formatHTML()
 		textRenderer = QTextDocument()
 		context = QAbstractTextDocumentLayout.PaintContext()
