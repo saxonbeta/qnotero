@@ -47,17 +47,17 @@ class QnoteroItemDelegate(QStyledItemDelegate):
 		self.tagFont = QFont()
 		self.tagFont.setBold(True)
 		self.tagFont.setPointSize(self.boldFont.pointSize() - 2)
-		self.dy = QFontMetrics(self.boldFont) \
+		self.dy = int(QFontMetrics(self.boldFont) \
 			.size(Qt.TextSingleLine, u"Dummy").height() \
-			*self.qnotero.theme.lineHeight()
-		self.margin = 0.5*self.dy
-		self._margin = 0.1*self.dy
-		self.height = 5*self.dy+self._margin
+			*self.qnotero.theme.lineHeight())
+		self.margin = int(self.dy/2)
+		self._margin = int(self.dy/10)
+		self.height = int(5*self.dy+self._margin)
 		self.noPdfPixmap = self.qnotero.theme.pixmap(u"nopdf")
 		self.pdfPixmap = self.qnotero.theme.pixmap(u"pdf")
 		self.aboutPixmap = self.qnotero.theme.pixmap(u"about")
 		self.notePixmap = self.qnotero.theme.pixmap(u"note")
-		self.pixmapSize = self.pdfPixmap.height()+0.5*self.dy
+		self.pixmapSize = int(self.pdfPixmap.height()+self.dy/2)
 		self.roundness = self.qnotero.theme.roundness()
 
 	def sizeHint(self, option, index):
@@ -117,7 +117,7 @@ class QnoteroItemDelegate(QStyledItemDelegate):
 
 		# Draw the frame
 		_rect = option.rect.adjusted(self._margin, self._margin,
-			-2*self._margin, -self._margin)
+			- int(2*self._margin), -self._margin)
 		pen = painter.pen()
 		pen.setColor(self.palette.color(background))
 		painter.setPen(pen)
@@ -130,15 +130,15 @@ class QnoteroItemDelegate(QStyledItemDelegate):
 
 		# Draw icon
 		_rect = QRect(option.rect)
-		_rect.moveBottom(_rect.bottom() + 0.5*self.dy)
-		_rect.moveLeft(_rect.left() + 0.5*self.dy)
+		_rect.moveBottom(int(_rect.bottom() + self.dy/2))
+		_rect.moveLeft(int(_rect.left() + self.dy/2))
 		_rect.setHeight(self.pixmapSize)
 		_rect.setWidth(self.pixmapSize)
 		painter.drawPixmap(_rect, pixmap)
 
 		# Draw the text
 		painter.save()
-		_rect = option.rect.adjusted(self.pixmapSize+0.5*self.dy, 0.5*self.dy,
+		_rect = option.rect.adjusted(int(self.pixmapSize+self.dy/2), int(self.dy/2),
 									 -self.dy, 0)
 
 		f = [self.tagFont, self.italicFont, self.regularFont,
