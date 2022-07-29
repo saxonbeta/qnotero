@@ -1,6 +1,6 @@
 name: qnotero
 title: Qnotero
-version: '2.3.0'
+version: '2.3.1'
 summary: Standalone sidekick to Zotero reference manager.
 description: |
  Qnotero provides lightning-quick access to your Zotero references,
