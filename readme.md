@@ -1,7 +1,6 @@
-Qnotero v2.3.0
+Qnotero v2.3.1
 
-
-&copy; 2020 E. Albiter
+&copy; 2022 E. Albiter
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/qnotero)
 

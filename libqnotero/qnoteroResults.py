@@ -96,6 +96,38 @@ class QnoteroResults(QListWidget):
             self.qnotero.ui.lineEditQuery.selectAll()
             self.qnotero.ui.lineEditQuery.setFocus()
             return
+        elif e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter:
+            zoteroItem = self.qnotero.ui.listWidgetResults.currentItem().zoteroItem
+            if zoteroItem.fulltext is None and zoteroItem.url is None:
+                print('qnoteroResults.mousePressEvent(): no file attachment nor url')
+                return
+            # If there is no a fulltext item open the URL of the entry
+            if len(zoteroItem.fulltext) == 0:
+                path = zoteroItem.url
+            # Only one attachment
+            elif len(zoteroItem.fulltext) == 1:
+                path = zoteroItem.fulltext[0]
+            # If there are more than one
+            else:
+                path, okPressed = QInputDialog.getItem(self, u'Attachments',
+                                                       u'Select attachment to open:', zoteroItem.fulltext, 0, False)
+                if path is None or not okPressed:
+                    return
+
+            print("qnoteroResults.keyPressEvent(): prepare to open %s"
+                  % path)
+            try:
+                if platform.system() == 'Darwin':  # macOS
+                    subprocess.call(('open', path))
+                elif platform.system() == 'Windows':  # Windows
+                    path = os.path.normpath(path)
+                    os.startfile(path)
+                else:  # linux variants
+                    subprocess.call(('xdg-open', path))
+                print("qnoteroResults.keyPressEvent(): file opened")
+            except Exception as exc:
+                print("qnoteroResults.keyPressEvent(): failed to open file or URL, sorry... %s" % exc)
+
         QListWidget.keyPressEvent(self, e)
 
     def Clicked(self, item):
