@@ -23,6 +23,9 @@ import sys
 if sys.platform == 'linux':
     import glob
     from setuptools import setup
+elif sys.platform == 'openbsd7':
+	import glob
+	from setuptools import setup
 else:
     from cx_Freeze import setup, Executable
 
